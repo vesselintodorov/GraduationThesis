@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using EventSystem.Web.Models;
+using EventSystem.Data.Models;
+using EventSystem.Data;
 
 namespace EventSystem.Web
 {

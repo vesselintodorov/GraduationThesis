@@ -180,7 +180,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -259,6 +258,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\EventSystem.Data.Models\EventSystem.Data.Models.csproj">
+      <Project>{b7e6ad56-c8e5-46b7-a99e-94de6b623c33}</Project>
+      <Name>EventSystem.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\EventSystem.Data\EventSystem.Data.csproj">
+      <Project>{41b48a85-e88f-4bba-b6cd-f7b775d3ca34}</Project>
+      <Name>EventSystem.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EventSystem.Web.Models;
+using EventSystem.Data.Models;
 
 namespace EventSystem.Web.Controllers
 {
