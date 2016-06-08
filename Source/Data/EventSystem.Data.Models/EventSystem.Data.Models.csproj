@@ -53,11 +53,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="EventTranslation.cs" />
+    <Compile Include="EventUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserTranslation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EventSystem.Data.Common\EventSystem.Data.Common.csproj">
+      <Project>{71ef7f90-88b6-440f-acea-5b9592c924f3}</Project>
+      <Name>EventSystem.Data.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

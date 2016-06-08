@@ -61,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EventSystem.Data.Common\EventSystem.Data.Common.csproj">
+      <Project>{71ef7f90-88b6-440f-acea-5b9592c924f3}</Project>
+      <Name>EventSystem.Data.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EventSystem.Data.Models\EventSystem.Data.Models.csproj">
       <Project>{b7e6ad56-c8e5-46b7-a99e-94de6b623c33}</Project>
       <Name>EventSystem.Data.Models</Name>
