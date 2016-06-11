@@ -25,11 +25,9 @@ namespace EventSystem.Data
 
         public IDbSet<Event> Events { get; set; }
 
-        public IDbSet<EventTranslation> EventsTranslations { get; set; }
 
         public IDbSet<EventUser> EventsUsers { get; set; }
 
-        public IDbSet<UserTranslation> UsersTranslations { get; set; }
 
         public override int SaveChanges()
         {

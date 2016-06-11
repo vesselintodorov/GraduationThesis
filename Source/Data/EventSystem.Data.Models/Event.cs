@@ -13,12 +13,10 @@ namespace EventSystem.Data.Models
     public class Event : AuditInfo, IDeletableEntity
     {
         private ICollection<EventUser> users;
-        private ICollection<EventTranslation> translations;
 
         public Event()
         {
             this.Users = new HashSet<EventUser>();
-            this.Translations = new HashSet<EventTranslation>();
         }
 
         [Key]
@@ -26,9 +24,9 @@ namespace EventSystem.Data.Models
 
         public EventType Type { get; set; }
 
-        //public string Title { get; set; }
+        public string Title { get; set; }
 
-        //public string Content { get; set; }
+        public string Content { get; set; }
 
         public string Author { get; set; }
 
@@ -40,11 +38,6 @@ namespace EventSystem.Data.Models
             set { this.users = value; }
         }
 
-        public virtual ICollection<EventTranslation> Translations
-        {
-            get { return this.translations; }
-            set { this.translations = value; }
-        }
 
         [Index]
         public bool IsDeleted { get; set; }

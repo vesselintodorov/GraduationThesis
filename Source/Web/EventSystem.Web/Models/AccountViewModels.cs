@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace EventSystem.Web.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using EventSystem.Web.Attributes;
+    using Resources;
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [ResourcesDisplayName("Email", NameResourceType = typeof(Global))]
         public string Email { get; set; }
     }
 
@@ -42,61 +44,70 @@ namespace EventSystem.Web.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [ResourcesDisplayName("Email", NameResourceType = typeof(Global))]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEmail")]
+        [ResourcesDisplayName("Email", NameResourceType = typeof(Global))]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredPassword")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [ResourcesDisplayName("Password", NameResourceType = typeof(Global))]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [ResourcesDisplayName("RememberMe", NameResourceType = typeof(Global))]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredFirstName")]
+        [ResourcesDisplayName("FirstName", NameResourceType = typeof(Global))]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Global), ErrorMessageResourceName = "RequiredLastName")]
+        [ResourcesDisplayName("LastName", NameResourceType = typeof(Global))]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEmail")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEmail")]
+        [ResourcesDisplayName("Email", NameResourceType = typeof(Global))]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredPassword")]
+        [StringLength(100, ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredPassword", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [ResourcesDisplayName("Password", NameResourceType = typeof(Global))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [ResourcesDisplayName("ConfirmPassword", NameResourceType = typeof(Global))]
+        [Compare("Password", ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "PasswordMismatch")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEmail")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEmail")]
+        [ResourcesDisplayName("Email", NameResourceType = typeof(Global))]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredPassword")]
+        [StringLength(100, ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredPassword", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [ResourcesDisplayName("Password", NameResourceType = typeof(Global))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [ResourcesDisplayName("ConfirmPassword", NameResourceType = typeof(Global))]
+        [Compare("Password", ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "PasswordMismatch")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -104,9 +115,9 @@ namespace EventSystem.Web.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEmail")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEmail")]
+        [ResourcesDisplayName("Email", NameResourceType = typeof(Global))]
         public string Email { get; set; }
     }
 }

@@ -12,11 +12,9 @@
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
         private ICollection<EventUser> users;
-        private ICollection<UserTranslation> translations;
         public ApplicationUser()
         {
             this.Users = new HashSet<EventUser>();
-            this.Translations = new HashSet<UserTranslation>();
             this.CreatedOn = DateTime.Now;
         }
 
@@ -34,12 +32,9 @@
             set { this.users = value; }
         }
 
-        public virtual ICollection<UserTranslation> Translations
-        {
-            get { return this.translations; }
-            set { this.translations = value; }
-        }
+        public string FirstName { get; set; }
 
+        public string LastName { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
