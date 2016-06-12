@@ -85,28 +85,33 @@ namespace EventSystem.Web.Controllers
 
         public ActionResult List(BrowseFilterInputModel browseFilterModel)
         {
-            var events = this.events.All().Where(x => !x.IsFinished).ToList();
+            var events = this.events.All().Where(x => !x.IsFinished);
+
+            if (browseFilterModel.Type != null)
+            {
+                events = events.Where(x => x.Type == browseFilterModel.Type);
+            }
+
+            if (browseFilterModel.StartDate != null)
+            {
+                events = events.Where(x => x.StartDate >= browseFilterModel.StartDate);
+            }
+
+            if (browseFilterModel.EndDate != null)
+            {
+                events = events.Where(x => x.EndDate <= browseFilterModel.EndDate);
+            }
 
 
             var model = events.Select(x => new EventViewModel
-                {
-                    Id = x.EventId,
-                    Title = x.Title,
-                    ShortDescription = x.Description,
-                    StartDate = x.StartDate,
-                    EndDate = x.EndDate
-                }).ToList();
-            //if (browseFilterModel == null)
-            //{
-            //    return View(events);
-            //}
-
-            //if (!string.IsNullOrEmpty(browseFilterModel.SearchedEventName))
-            //{
-            //    events = events.Where(x => x.Title )
-            //}
-
-
+            {
+                Id = x.EventId,
+                Title = x.Title,
+                Type = x.Type,
+                ShortDescription = x.Description,
+                StartDate = x.StartDate,
+                EndDate = x.EndDate
+            }).ToList();
 
             return PartialView(model);
         }
