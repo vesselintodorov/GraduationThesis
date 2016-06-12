@@ -1,0 +1,14 @@
+﻿@model EventSystem.Web.Models.Event.DisplayEventViewModel
+@{
+    ViewBag.Title = "Display";
+}
+
+<h2>Display</h2>
+
+
+<p>Title: @Model.EventInfo.Title</p>
+<p>Type: @Model.EventInfo.Type.ToString()</p>
+<p>Description: @Model.EventInfo.Description</p>
+<p>StartDate: @Model.EventInfo.StartDate</p>
+<p>EndDate: @Model.EventInfo.EndDate</p>
+

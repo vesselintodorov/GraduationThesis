@@ -1,0 +1,60 @@
+﻿@model EventSystem.Web.Models.Event.BrowseFilterInputModel
+@{
+    ViewBag.Title = "Browse";
+}
+
+<script>
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            orientation: "bottom auto"
+        }); //Initialise any date pickers
+    });
+</script>
+
+<h2>Browse</h2>
+
+@using (Ajax.BeginForm("List", "Event",
+    new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "eventsList",
+    }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group col-md-3">
+        @Html.LabelFor(m => m.SearchedEventName, new { @class = "col-md-12 control-label" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.SearchedEventName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group col-md-2">
+        @Html.LabelFor(m => m.Type, new { @class = "col-md-12 control-label" })
+        <div class="col-md-12">
+            @Html.DropDownListFor(model => model.Type,
+            Enum.GetNames(typeof(EventSystem.Data.Common.Enums.EventType))
+         .Select(e => new SelectListItem { Text = e }), new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group col-md-3">
+        @Html.LabelFor(m => m.StartDate, new { @class = "col-md-12 control-label" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker", placeholder = "Enter start date..." })
+        </div>
+    </div>
+
+    <div class="form-group col-md-3">
+        @Html.LabelFor(m => m.EndDate, new { @class = "col-md-12 control-label" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker", placeholder = "Enter end date..." })
+        </div>
+    </div>
+}
+
+<div id="eventsList">
+    @Html.Action("List", "Event")
+</div>

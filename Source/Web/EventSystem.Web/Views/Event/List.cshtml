@@ -1,0 +1,19 @@
+﻿@model IEnumerable<EventSystem.Web.Models.Event.EventViewModel>
+@using GridMvc.Html
+
+@Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(m => m.Title);
+               columns.Add(m => m.ShortDescription);
+               columns.Add(m => m.StartDate);
+               columns.Add(m => m.EndDate);
+           }).WithPaging(20)
+
+@*@foreach (var eventRecord in Model)
+    {
+        <article class="col-md-12 well">
+            <div>@eventRecord.Title</div>
+            <div>@eventRecord.ShortDescription</div>
+            <div>@eventRecord.StartDate</div>
+        </article>
+    }*@

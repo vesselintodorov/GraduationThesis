@@ -26,9 +26,13 @@ namespace EventSystem.Data.Models
 
         public string Title { get; set; }
 
-        public string Content { get; set; }
+        public string Description { get; set; }
 
         public string Author { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
 
         public bool IsFeatured { get; set; }
 
@@ -38,13 +42,13 @@ namespace EventSystem.Data.Models
             set { this.users = value; }
         }
 
+        [Index]
+        public bool IsFinished { get; set; }
 
         [Index]
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
-
-        public bool IsApproved { get; set; }
 
         
 

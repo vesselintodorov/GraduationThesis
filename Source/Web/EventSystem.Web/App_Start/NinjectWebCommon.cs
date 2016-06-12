@@ -10,6 +10,10 @@ namespace EventSystem.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using EventSystem.Data.Common.Repository;
+    using EventSystem.Data;
+    using System.Data.Entity;
+    using EventSystem.Data.Models;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +65,14 @@ namespace EventSystem.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<DbContext>().To<ApplicationDbContext>();
+
+            kernel.Bind(typeof(IRepository<Event>)).To(typeof(DeletableEntityRepository<Event>));
+
+            kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
+
+            kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+
         }        
     }
 }
