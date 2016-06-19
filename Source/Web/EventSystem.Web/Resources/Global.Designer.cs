@@ -311,5 +311,14 @@ namespace Resources {
                 return ResourceManager.GetString("Type", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете валидна дата във формат ден/месец/година час/минути/секунди..
+        /// </summary>
+        public static string ValidDate {
+            get {
+                return ResourceManager.GetString("ValidDate", resourceCulture);
+            }
+        }
     }
 }

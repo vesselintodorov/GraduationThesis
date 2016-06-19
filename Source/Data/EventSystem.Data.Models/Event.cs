@@ -13,10 +13,12 @@ namespace EventSystem.Data.Models
     public class Event : AuditInfo, IDeletableEntity
     {
         private ICollection<EventUser> users;
+        private ICollection<Lecture> lectures;
 
         public Event()
         {
             this.Users = new HashSet<EventUser>();
+            this.Lectures = new HashSet<Lecture>();
         }
 
         [Key]
@@ -40,6 +42,12 @@ namespace EventSystem.Data.Models
         {
             get { return this.users; }
             set { this.users = value; }
+        }
+
+        public virtual ICollection<Lecture> Lectures
+        {
+            get { return this.lectures; }
+            set { this.lectures = value; }
         }
 
         [Index]

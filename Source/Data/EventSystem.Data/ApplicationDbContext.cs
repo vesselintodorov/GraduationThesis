@@ -28,6 +28,8 @@ namespace EventSystem.Data
 
         public IDbSet<EventUser> EventsUsers { get; set; }
 
+        public IDbSet<Lecture> Lectures { get; set; }
+
 
         public override int SaveChanges()
         {

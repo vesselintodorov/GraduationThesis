@@ -35,6 +35,11 @@ namespace EventSystem.Web.Models.Event
 
         public bool IsReadMore { get; set; }
 
+        public bool IsShowUsers { get; set; }
+
+        public List<LectureViewModel> Lectures { get; set; }
+
+        public List<UserViewModel> Users { get; set; }
 
     }
 }
