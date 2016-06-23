@@ -11,13 +11,14 @@ namespace EventSystem.Data.Models
     {
         public int Id { get; set; }
 
-        public int EventID { get; set; }
-
-        [ForeignKey("EventID")]
-        public virtual Event EventId { get; set; }
+        public int EventId { get; set; }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
+
+        public string Teacher { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

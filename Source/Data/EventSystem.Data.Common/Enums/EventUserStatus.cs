@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace EventSystem.Data.Common.Enums
 {
-    public enum EventType
+    public enum EventUserStatus
     {
-        Conference = 1,
-        Seminar = 2,
-        Meeting = 3,
-        PressConference = 4,
-        Lecture = 5,
-        Course = 6
+        Passed = 1,
+        Enrolled = 2,
+        Unenrolled = 3,
+        Expelled = 4,
     }
 }

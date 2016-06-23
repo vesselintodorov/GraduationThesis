@@ -25,14 +25,14 @@ namespace EventSystem.Web.Models.Event
 
 
         [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredStartDate")]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy hh:ii}")]
         [DataType(DataType.Date)]
         [ResourcesDisplayName("StartDate", NameResourceType = typeof(Global))]
         public DateTime StartDate { get; set; }
 
 
         [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEndDate")]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy hh:ii}")]
         [DataType(DataType.Date)]
         [ResourcesDisplayName("EndDate", NameResourceType = typeof(Global))]
         public DateTime EndDate { get; set; }

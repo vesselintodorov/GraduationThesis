@@ -117,19 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddLecture" xml:space="preserve">
+    <value>Добави лекция</value>
+  </data>
+  <data name="EventEnrolled" xml:space="preserve">
+    <value>Вие успешно се записахте за това събитие!</value>
+  </data>
+  <data name="EventExpelled" xml:space="preserve">
+    <value>Вие нямате право да участвате на това събитие!</value>
+  </data>
   <data name="EventName" xml:space="preserve">
     <value>Име на събитието</value>
   </data>
   <data name="EventNotFound" xml:space="preserve">
     <value>Събитието не е намерено.</value>
   </data>
+  <data name="EventNotPart" xml:space="preserve">
+    <value>Грешка! Вие не сте част от това събитие!</value>
+  </data>
+  <data name="EventPassed" xml:space="preserve">
+    <value>Вие вече сте преминали това събитие!</value>
+  </data>
+  <data name="EventUnenrolled" xml:space="preserve">
+    <value>Вие успешно се отписахте от това събитие!</value>
+  </data>
+  <data name="LectureDatePlaceholder" xml:space="preserve">
+    <value>Въведете дата на лекцията</value>
+  </data>
+  <data name="LectureDescription" xml:space="preserve">
+    <value>Описание на лекцията</value>
+  </data>
+  <data name="LectureDescriptionPlaceholder" xml:space="preserve">
+    <value>Въведете описание на лекция</value>
+  </data>
+  <data name="Lectures" xml:space="preserve">
+    <value>Лекции</value>
+  </data>
+  <data name="LectureTeacher" xml:space="preserve">
+    <value>Преподавател</value>
+  </data>
+  <data name="LectureTeacherPlaceholder" xml:space="preserve">
+    <value>Въведете преподавател за лекцията</value>
+  </data>
+  <data name="LectureTitle" xml:space="preserve">
+    <value>Име на лекцията</value>
+  </data>
+  <data name="LectureTitlePlaceholder" xml:space="preserve">
+    <value>Въведете име на лекция</value>
+  </data>
+  <data name="NotSuccessfullyAddedLecture" xml:space="preserve">
+    <value>Неуспешно добавена лекция! Моля опитайте пак.</value>
+  </data>
   <data name="RequiredDescription" xml:space="preserve">
     <value>Моля въведете описание на събитието.</value>
+  </data>
+  <data name="RequiredLectureDate" xml:space="preserve">
+    <value>Моля въведете дата на провеждане на лекцията.</value>
+  </data>
+  <data name="RequiredLectureDescription" xml:space="preserve">
+    <value>Моля въведете описание на лекцията.</value>
+  </data>
+  <data name="RequiredLectureTeacher" xml:space="preserve">
+    <value>Моля въведете преподавател за лекцията.</value>
+  </data>
+  <data name="RequiredLectureTitle" xml:space="preserve">
+    <value>Моля въведете име на лекцията.</value>
   </data>
   <data name="RequiredTitle" xml:space="preserve">
     <value>Моля въведете заглавие на събитието.</value>
   </data>
   <data name="RequiredType" xml:space="preserve">
     <value>Моля въведете тип на събитието.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SuccessfullyAddedLecture" xml:space="preserve">
+    <value>Успешно добавена лекция за конкретния курс!</value>
   </data>
 </root>

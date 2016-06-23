@@ -203,9 +203,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event\AddEventInputModel.cs" />
     <Compile Include="Models\Event\BrowseFilterInputModel.cs" />
-    <Compile Include="Models\Event\DisplayEventViewModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
-    <Compile Include="Models\Event\LectureViewModel.cs" />
+    <Compile Include="Models\Event\CourseLectureViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -215,9 +214,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\Global.Designer.cs">
+      <DependentUpon>Global.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Global.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -308,6 +307,9 @@
     <Content Include="Views\Event\List.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Event\AddLecture.cshtml" />
+    <Content Include="Views\Event\LecturesGrid.cshtml" />
+    <Content Include="Views\Event\UsersGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

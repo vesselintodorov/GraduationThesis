@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EventSystem.Data.Common.Enums;
 
 namespace EventSystem.Data.Models
 {
@@ -22,5 +23,6 @@ namespace EventSystem.Data.Models
         [ForeignKey("UserID")]
         public virtual ApplicationUser UserId { get; set; }
 
+        public EventUserStatus Status { get; set; }
     }
 }

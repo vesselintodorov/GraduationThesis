@@ -28,7 +28,7 @@
         <div class="col-md-12">
             @Html.DropDownListFor(model => model.Type,
             Enum.GetNames(typeof(EventSystem.Data.Common.Enums.EventType))
-         .Select(e => new SelectListItem { Text = e }), new { @class = "form-control browseFilter" })
+         .Select(e => new SelectListItem { Text = e }), "Select event type", new { @class = "form-control browseFilter" })
 
         </div>
     </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +17,14 @@ namespace EventSystem.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //Application_BeginRequest();
+        }
+
+        protected void Application_BeginRequest()
+        {
+            CultureInfo info = new CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+            info.DateTimeFormat.LongDatePattern = "dd/mm/yyyy hh:ii";
+            System.Threading.Thread.CurrentThread.CurrentCulture = info;
         }
     }
 }

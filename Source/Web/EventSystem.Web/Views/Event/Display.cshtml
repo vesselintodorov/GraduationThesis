@@ -1,14 +1,115 @@
-﻿@model EventSystem.Web.Models.Event.DisplayEventViewModel
+﻿@model EventSystem.Web.Models.Event.EventViewModel
+@using Resources
 @{
     ViewBag.Title = "Display";
 }
+<div id="displayEventContainer" class="">
 
-<h2>Display</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#eventInfoContainer">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                    @Global.EventInfo
+                </a>
+            </h4>
+        </div>
+
+        <div id="eventInfoContainer" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <p>Title: @Model.Title</p>
+                <p>Type: @Model.Type.ToString()</p>
+                <p>Description: @Model.Description</p>
+                <p>StartDate: @Model.StartDate</p>
+                <p>EndDate: @Model.EndDate</p>
+            </div>
+        </div>
+    </div>
 
 
-<p>Title: @Model.EventInfo.Title</p>
-<p>Type: @Model.EventInfo.Type.ToString()</p>
-<p>Description: @Model.EventInfo.Description</p>
-<p>StartDate: @Model.EventInfo.StartDate</p>
-<p>EndDate: @Model.EventInfo.EndDate</p>
+    @if (Model.Type == EventSystem.Data.Common.Enums.EventType.Course)
+    {
+        if (Model.IsManageLecturesAllowed)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-target="#addLectureContainer">
+                            <span class="glyphicon glyphicon-chevron-up"></span>
+                            @EventsResource.AddLecture
+                        </a>
+                    </h4>
+                </div>
 
+                <div id="addLectureContainer" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        @Html.Action("AddLecture", "Event", new { eventId = Model.Id })
+                        <div class="alert alert-success" style="display:none;">
+                            <strong>@Resources.EventsResource.SuccessfullyAddedLecture</strong>
+                        </div>
+                        <div class="alert alert-danger" style="display:none;">
+                            <strong>@Resources.EventsResource.NotSuccessfullyAddedLecture</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-target="#lecturesContainer">
+                        <span class="glyphicon glyphicon-chevron-up"></span>
+                        @EventsResource.Lectures
+                    </a>
+                </h4>
+            </div>
+
+            <div id="lecturesContainer" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div id="lecturesGridContainer">
+                        @Html.Action("LecturesGrid", "Event", new { eventId = Model.Id })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (Model.IsManageUsersAllowed)
+    {
+
+
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-target="#usersContainer">
+                        <span class="glyphicon glyphicon-chevron-up"></span>
+                        @Global.Attendees
+
+                    </a>
+                </h4>
+            </div>
+
+            <div id="usersContainer" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div id="usersGridContainer">
+                        @Html.Action("UsersGrid", "Event", new { eventId = Model.Id })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="text-center">
+        @if (!Model.IsCreator)
+        {
+            <input id="subscribeBtn" type="button" class="btn btn-lg btn-primary btn-success" value="@Global.Subscribe" style="@(Model.IsUserEnrolled ? "display: none;" : "")" />
+            <input id="unsubscribeBtn" type="button" class="btn btn-lg btn-primary btn-danger" value="@Global.Unsubscribe" style="@(Model.IsUserEnrolled ? "" : "display: none;")" />
+        }
+        <div id="eventMessageContainer"></div>
+
+    </div>
+
+</div>

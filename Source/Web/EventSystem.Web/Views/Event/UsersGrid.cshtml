@@ -1,0 +1,9 @@
+﻿@model IEnumerable<EventSystem.Web.Models.UserViewModel>
+@using GridMvc.Html
+@using Resources
+
+@Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(m => m.FirstName).Titled(Global.FirstName);
+               columns.Add(m => m.LastName).Titled(Global.LastName);
+           })

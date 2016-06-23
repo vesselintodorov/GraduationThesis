@@ -22,3 +22,17 @@ select,
 textarea {
     max-width: 280px;
 }
+
+body { padding-top: 70px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}
+
+a:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.field-validation-error span {
+    color:#ff0000 !important;
+}

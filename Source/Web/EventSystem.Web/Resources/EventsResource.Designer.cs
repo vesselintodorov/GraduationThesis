@@ -61,6 +61,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добави лекция.
+        /// </summary>
+        public static string AddLecture {
+            get {
+                return ResourceManager.GetString("AddLecture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вие успешно се записахте за това събитие!.
+        /// </summary>
+        public static string EventEnrolled {
+            get {
+                return ResourceManager.GetString("EventEnrolled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вие нямате право да участвате на това събитие!.
+        /// </summary>
+        public static string EventExpelled {
+            get {
+                return ResourceManager.GetString("EventExpelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Име на събитието.
         /// </summary>
         public static string EventName {
@@ -79,11 +106,155 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Грешка! Вие не сте част от това събитие!.
+        /// </summary>
+        public static string EventNotPart {
+            get {
+                return ResourceManager.GetString("EventNotPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вие вече сте преминали това събитие!.
+        /// </summary>
+        public static string EventPassed {
+            get {
+                return ResourceManager.GetString("EventPassed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вие успешно се отписахте от това събитие!.
+        /// </summary>
+        public static string EventUnenrolled {
+            get {
+                return ResourceManager.GetString("EventUnenrolled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Въведете дата на лекцията.
+        /// </summary>
+        public static string LectureDatePlaceholder {
+            get {
+                return ResourceManager.GetString("LectureDatePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Описание на лекцията.
+        /// </summary>
+        public static string LectureDescription {
+            get {
+                return ResourceManager.GetString("LectureDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Въведете описание на лекция.
+        /// </summary>
+        public static string LectureDescriptionPlaceholder {
+            get {
+                return ResourceManager.GetString("LectureDescriptionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лекции.
+        /// </summary>
+        public static string Lectures {
+            get {
+                return ResourceManager.GetString("Lectures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Преподавател.
+        /// </summary>
+        public static string LectureTeacher {
+            get {
+                return ResourceManager.GetString("LectureTeacher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Въведете преподавател за лекцията.
+        /// </summary>
+        public static string LectureTeacherPlaceholder {
+            get {
+                return ResourceManager.GetString("LectureTeacherPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Име на лекцията.
+        /// </summary>
+        public static string LectureTitle {
+            get {
+                return ResourceManager.GetString("LectureTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Въведете име на лекция.
+        /// </summary>
+        public static string LectureTitlePlaceholder {
+            get {
+                return ResourceManager.GetString("LectureTitlePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неуспешно добавена лекция! Моля опитайте пак..
+        /// </summary>
+        public static string NotSuccessfullyAddedLecture {
+            get {
+                return ResourceManager.GetString("NotSuccessfullyAddedLecture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Моля въведете описание на събитието..
         /// </summary>
         public static string RequiredDescription {
             get {
                 return ResourceManager.GetString("RequiredDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете дата на провеждане на лекцията..
+        /// </summary>
+        public static string RequiredLectureDate {
+            get {
+                return ResourceManager.GetString("RequiredLectureDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете описание на лекцията..
+        /// </summary>
+        public static string RequiredLectureDescription {
+            get {
+                return ResourceManager.GetString("RequiredLectureDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете преподавател за лекцията..
+        /// </summary>
+        public static string RequiredLectureTeacher {
+            get {
+                return ResourceManager.GetString("RequiredLectureTeacher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете име на лекцията..
+        /// </summary>
+        public static string RequiredLectureTitle {
+            get {
+                return ResourceManager.GetString("RequiredLectureTitle", resourceCulture);
             }
         }
         
@@ -102,6 +273,24 @@ namespace Resources {
         public static string RequiredType {
             get {
                 return ResourceManager.GetString("RequiredType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешно добавена лекция за конкретния курс!.
+        /// </summary>
+        public static string SuccessfullyAddedLecture {
+            get {
+                return ResourceManager.GetString("SuccessfullyAddedLecture", resourceCulture);
             }
         }
     }

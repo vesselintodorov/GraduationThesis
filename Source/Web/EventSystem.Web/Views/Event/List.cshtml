@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<EventSystem.Web.Models.Event.EventViewModel>
 @using GridMvc.Html
 
-@Html.Grid(Model).Columns(columns =>
+@Html.Grid(Model).Named("browseEventsGrid").Columns(columns =>
            {
+               columns.Add(m => m.Id, true);
                columns.Add(m => m.Title);
                columns.Add(m => m.Type);
                columns.Add(m => m.ShortDescription);
@@ -10,11 +11,11 @@
                columns.Add(m => m.EndDate);
            }).WithPaging(20)
 
-@*@foreach (var eventRecord in Model)
-    {
-        <article class="col-md-12 well">
-            <div>@eventRecord.Title</div>
-            <div>@eventRecord.ShortDescription</div>
-            <div>@eventRecord.StartDate</div>
-        </article>
-    }*@
+
+@*<script>
+    $(function () {
+        pageGrids.browseEventsGrid.onRowSelect(function (e) {
+            alert(e.row.OrderID);
+        });
+    });
+</script>*@
