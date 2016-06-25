@@ -45,10 +45,10 @@
                     <div class="panel-body">
                         @Html.Action("AddLecture", "Event", new { eventId = Model.Id })
                         <div class="alert alert-success" style="display:none;">
-                            <strong>@Resources.EventsResource.SuccessfullyAddedLecture</strong>
+                            <strong>@Resources.EventsResource.AddLectureSuccess</strong>
                         </div>
                         <div class="alert alert-danger" style="display:none;">
-                            <strong>@Resources.EventsResource.NotSuccessfullyAddedLecture</strong>
+                            <strong>@Resources.EventsResource.AddLectureFailure</strong>
                         </div>
                     </div>
                 </div>

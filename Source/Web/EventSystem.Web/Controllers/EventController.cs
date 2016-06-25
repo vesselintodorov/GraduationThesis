@@ -20,20 +20,22 @@ namespace EventSystem.Web.Controllers
         private IRepository<Lecture> lectures;
         private IRepository<EventUser> eventsUsers;
 
-        public EventController(IRepository<Event> events, IRepository<Lecture> coursesLectures, IRepository<EventUser> eventsUsers)
+        public EventController(IRepository<Event> events, IRepository<Lecture> lectures, IRepository<EventUser> eventsUsers)
         {
             this.events = events;
-            this.lectures = coursesLectures;
+            this.lectures = lectures;
             this.eventsUsers = eventsUsers;
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Add(AddEventInputModel model)
         {
             if (ModelState.IsValid)
@@ -58,9 +60,11 @@ namespace EventSystem.Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Display(int eventId)
         {
-            var currentEvent = this.events.All().FirstOrDefault(x => x.EventId == eventId);
+            //var currentEvent = this.events.All().FirstOrDefault(x => x.EventId == eventId);
+            var currentEvent = this.events.GetById(eventId);
 
             if (currentEvent == null)
             {
@@ -94,7 +98,7 @@ namespace EventSystem.Web.Controllers
         }
 
 
-
+        [Authorize]
         public ActionResult Browse()
         {
             var browseFilterModel = new BrowseFilterInputModel();
@@ -102,6 +106,7 @@ namespace EventSystem.Web.Controllers
             return View(browseFilterModel);
         }
 
+        [Authorize]
         public ActionResult List(BrowseFilterInputModel browseFilterModel)
         {
             var events = this.events.All().Where(x => !x.IsFinished);
@@ -136,6 +141,7 @@ namespace EventSystem.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult AddLecture(int eventId)
         {
             ViewBag.EventId = eventId;
@@ -143,6 +149,7 @@ namespace EventSystem.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult AddLecture(CourseLectureViewModel model)
         {
             if (ModelState.IsValid)
@@ -193,6 +200,8 @@ namespace EventSystem.Web.Controllers
                 {
                     this.eventsUsers.Update(currentEventUser);
                     currentEventUser.Status = EventUserStatus.Enrolled;
+                    this.eventsUsers.SaveChanges();
+
                     alertType = "success";
                     alertMsg = EventsResource.EventEnrolled;
                 }
@@ -217,9 +226,10 @@ namespace EventSystem.Web.Controllers
                 });
                 alertType = "success";
                 alertMsg = EventsResource.EventEnrolled;
+                this.eventsUsers.SaveChanges();
             }
 
-            this.eventsUsers.SaveChanges();
+            
             return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
         }
 
@@ -237,7 +247,9 @@ namespace EventSystem.Web.Controllers
                 {
                     this.eventsUsers.Update(currentEventUser);
                     currentEventUser.Status = EventUserStatus.Unenrolled;
-                    alertType = "warning";
+                    this.eventsUsers.SaveChanges();
+
+                    alertType = "info";
                     alertMsg = EventsResource.EventUnenrolled;
                 }
                 else
@@ -252,7 +264,6 @@ namespace EventSystem.Web.Controllers
                 alertMsg = EventsResource.EventNotPart;
             }
 
-            this.eventsUsers.SaveChanges();
             return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
         }
 
@@ -264,6 +275,7 @@ namespace EventSystem.Web.Controllers
                 courseLectures = this.lectures.All().Where(x => x.EventId == currentEvent.EventId)
                     .Select(x => new CourseLectureViewModel
                     {
+                        Id = x.Id,
                         EventId = x.EventId,
                         LectureTitle = x.Title,
                         LectureTeacher = x.Teacher,
@@ -280,6 +292,7 @@ namespace EventSystem.Web.Controllers
             return this.lectures.All().Where(x => x.EventId == eventId)
                 .Select(x => new CourseLectureViewModel
                 {
+                    Id = x.Id,
                     EventId = x.EventId,
                     LectureTitle = x.Title,
                     LectureTeacher = x.Teacher,
@@ -291,12 +304,82 @@ namespace EventSystem.Web.Controllers
 
         private List<UserViewModel> GetCourseUsers(int eventId)
         {
-            return this.eventsUsers.All().Where(x => x.EventID == eventId)
+            var currentEvent = this.events.GetById(eventId);
+            var currentUserId = User.Identity.GetUserId();
+
+            return this.eventsUsers.All().Where(x => x.EventID == eventId && x.Status == EventUserStatus.Enrolled)
                 .Select(x => new UserViewModel
                 {
+                    Id = x.Id,
                     FirstName = x.UserId.FirstName,
-                    LastName = x.UserId.LastName
+                    LastName = x.UserId.LastName,
+                    IsCreator = currentEvent.Author == currentUserId,
                 }).ToList();
         }
+
+        public ActionResult DeleteLecture(int eventId, int lectureId)
+        {
+            string alertType = string.Empty;
+            string alertMsg = string.Empty;
+            var currentUserId = User.Identity.GetUserId();
+
+            var currentEventAuthorUserId = this.events.All().FirstOrDefault(x => x.EventId == eventId).Author;
+
+            if (this.lectures.All().Any(x => x.Id == lectureId))
+            {
+                if (currentEventAuthorUserId == currentUserId)
+                {
+                    this.lectures.Delete(lectureId);
+                    alertType = "success";
+                    alertMsg = EventsResource.DeleteLectureSuccess;
+                    this.lectures.SaveChanges();
+                }
+                else
+                {
+                    alertType = "danger";
+                    alertMsg = EventsResource.DeleteEventContentNotAuthor;
+                }
+            }
+            else
+            {
+                alertType = "danger";
+                alertMsg = EventsResource.DeleteLectureFailure;
+            }
+            return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ExpellUser(int eventId, int eventUserId)
+        {
+
+            //change logic to set status of user to expelled, not deleting the row
+            string alertType = string.Empty;
+            string alertMsg = string.Empty;
+            var currentUserId = User.Identity.GetUserId();
+
+            var currentEventAuthorUserId = this.events.All().FirstOrDefault(x => x.EventId == eventId).Author;
+
+            if (this.eventsUsers.All().Any(x => x.Id == eventUserId))
+            {
+                if (currentEventAuthorUserId == currentUserId)
+                {
+                    this.eventsUsers.Delete(eventUserId);
+                    alertType = "success";
+                    alertMsg = EventsResource.ExpellUserSuccess;
+                    this.eventsUsers.SaveChanges();
+                }
+                else
+                {
+                    alertType = "danger";
+                    alertMsg = EventsResource.DeleteEventContentNotAuthor;
+                }
+            }
+            else
+            {
+                alertType = "danger";
+                alertMsg = EventsResource.ExpellUserFailure;
+            }
+            return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -2,8 +2,19 @@
 @using GridMvc.Html
 @using Resources
 
+@helper RenderDeleteUserButton(EventSystem.Web.Models.UserViewModel user)   //IsCreator
+{
+    if (user.IsCreator)
+    {
+        <input type="button" class="btn btn-default btnExpellUser" value="@Global.Expell" />
+    }
+   
+}
+
 @Html.Grid(Model).Columns(columns =>
            {
+               columns.Add().Encoded(false).Sanitized(false).RenderValueAs(o => @<span class="lectureId hidden">@o.Id</span>);
                columns.Add(m => m.FirstName).Titled(Global.FirstName);
                columns.Add(m => m.LastName).Titled(Global.LastName);
+               columns.Add().Encoded(false).Sanitized(false).RenderValueAs(o => RenderDeleteUserButton(o));
            })

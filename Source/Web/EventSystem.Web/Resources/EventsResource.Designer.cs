@@ -70,6 +70,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Неуспешно добавена лекция! Моля опитайте пак..
+        /// </summary>
+        public static string AddLectureFailure {
+            get {
+                return ResourceManager.GetString("AddLectureFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешно добавена лекция за конкретния курс!.
+        /// </summary>
+        public static string AddLectureSuccess {
+            get {
+                return ResourceManager.GetString("AddLectureSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не можете да триете съдържание от събитие, на което не сте автор!.
+        /// </summary>
+        public static string DeleteEventContentNotAuthor {
+            get {
+                return ResourceManager.GetString("DeleteEventContentNotAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неуспешно изтрита лекция. Моля опитайте по-късно..
+        /// </summary>
+        public static string DeleteLectureFailure {
+            get {
+                return ResourceManager.GetString("DeleteLectureFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешно изтрита лекция!.
+        /// </summary>
+        public static string DeleteLectureSuccess {
+            get {
+                return ResourceManager.GetString("DeleteLectureSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вие успешно се записахте за това събитие!.
         /// </summary>
         public static string EventEnrolled {
@@ -106,7 +151,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Грешка! Вие не сте част от това събитие!.
+        ///   Looks up a localized string similar to Вие не сте част от това събитие!.
         /// </summary>
         public static string EventNotPart {
             get {
@@ -129,6 +174,24 @@ namespace Resources {
         public static string EventUnenrolled {
             get {
                 return ResourceManager.GetString("EventUnenrolled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неуспешно изключване на човек. Моля опитайте по-късно..
+        /// </summary>
+        public static string ExpellUserFailure {
+            get {
+                return ResourceManager.GetString("ExpellUserFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешно изключване на човек!.
+        /// </summary>
+        public static string ExpellUserSuccess {
+            get {
+                return ResourceManager.GetString("ExpellUserSuccess", resourceCulture);
             }
         }
         
@@ -205,15 +268,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Неуспешно добавена лекция! Моля опитайте пак..
-        /// </summary>
-        public static string NotSuccessfullyAddedLecture {
-            get {
-                return ResourceManager.GetString("NotSuccessfullyAddedLecture", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Моля въведете описание на събитието..
         /// </summary>
         public static string RequiredDescription {
@@ -282,15 +336,6 @@ namespace Resources {
         public static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Успешно добавена лекция за конкретния курс!.
-        /// </summary>
-        public static string SuccessfullyAddedLecture {
-            get {
-                return ResourceManager.GetString("SuccessfullyAddedLecture", resourceCulture);
             }
         }
     }

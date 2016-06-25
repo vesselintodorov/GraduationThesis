@@ -132,6 +132,9 @@
   <data name="Date" xml:space="preserve">
     <value>Дата</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Изтрий</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="EventInfo" xml:space="preserve">
     <value>Информация за събитието</value>
+  </data>
+  <data name="Expell" xml:space="preserve">
+    <value>Изключи</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Име</value>

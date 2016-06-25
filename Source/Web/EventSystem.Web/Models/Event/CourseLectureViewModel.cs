@@ -10,6 +10,8 @@ namespace EventSystem.Web.Models.Event
 {
     public class CourseLectureViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessageResourceType = typeof(EventsResource), ErrorMessageResourceName = "RequiredLectureTitle")]
         [ResourcesDisplayName("Title", NameResourceType = typeof(Global))]
         public string LectureTitle { get; set; }

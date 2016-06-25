@@ -13,7 +13,8 @@ var app = function () {
 
         $("#subscribeBtn").click(onEventSubscribe);
         $("#unsubscribeBtn").click(onEventUnsubscribe);
-
+        $(".btnDeleteLecture").click(onDeleteLecture);
+        $(".btnExpellUser").click(onDeleteLecture);
     });
 
     function fixJqueryValidationForChrome() {
@@ -112,10 +113,56 @@ var app = function () {
             },
             done: new function () {
                 setTimeout(function () {
-                    $($("#eventMessageContainer .alert")).fadeOut(400);
+                    $($("#eventMessageContainer .alert")).fadeOut(200);
                 }, 3000);
             }
             
+        });
+    }
+
+    function onDeleteLecture(e) {
+        $.ajax({
+            url: "/Event/DeleteLecture",
+            type: "POST",
+            data: {
+                eventId: $("#EventId").val(),
+                lectureId: $(this).closest("tr").find(".lectureId").text(),
+            },
+            success: function (data) {
+                debugger;
+                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
+                $("#lecturesGridContainer").append(alertMessageElement);
+
+            },
+            done: new function () {
+                setTimeout(function () {
+                    $($("#lecturesGridContainer .alert")).fadeOut(200);
+                }, 3000);
+            }
+
+        });
+    }
+
+    function onExpellUserFromLecture(e) {
+        $.ajax({
+            url: "/Event/DeleteLecture",
+            type: "POST",
+            data: {
+                eventId: $("#EventId").val(),
+                lectureId: $(this).closest("tr").find(".lectureId").text(),
+            },
+            success: function (data) {
+                debugger;
+                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
+                $("#lecturesGridContainer").append(alertMessageElement);
+
+            },
+            done: new function () {
+                setTimeout(function () {
+                    $($("#lecturesGridContainer .alert")).fadeOut(200);
+                }, 3000);
+            }
+
         });
     }
 

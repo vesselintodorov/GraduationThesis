@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Изтрий.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Описание.
         /// </summary>
         public static string Description {
@@ -138,6 +147,15 @@ namespace Resources {
         public static string EventInfo {
             get {
                 return ResourceManager.GetString("EventInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изключи.
+        /// </summary>
+        public static string Expell {
+            get {
+                return ResourceManager.GetString("Expell", resourceCulture);
             }
         }
         
