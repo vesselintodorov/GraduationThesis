@@ -81,7 +81,7 @@ var app = function () {
             },
             done: new function () {
                 setTimeout(function () {
-                    $($("#eventMessageContainer .alert")).fadeOut(400);
+                    $($("#eventMessageContainer .alert")).fadeOut(200);
                 }, 3000);
             }
         });
