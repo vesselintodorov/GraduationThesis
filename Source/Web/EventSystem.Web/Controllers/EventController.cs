@@ -181,9 +181,9 @@ namespace EventSystem.Web.Controllers
 
         public ActionResult UsersGrid(int eventId)
         {
-            var lectures = GetCourseUsers(eventId);
+            var users = GetCourseUsers(eventId);
 
-            return PartialView(lectures);
+            return PartialView(users);
         }
 
         public ActionResult SubscribeUser(int eventId)
@@ -269,6 +269,8 @@ namespace EventSystem.Web.Controllers
 
         private List<CourseLectureViewModel> GetCourseLectures(Event currentEvent)
         {
+            var currentUserId = User.Identity.GetUserId();
+
             var courseLectures = new List<CourseLectureViewModel>();
             if (currentEvent.Type == EventType.Course)
             {
@@ -280,7 +282,8 @@ namespace EventSystem.Web.Controllers
                         LectureTitle = x.Title,
                         LectureTeacher = x.Teacher,
                         LectureDescription = x.Description,
-                        LectureDate = x.Date
+                        LectureDate = x.Date,
+                        IsCreator = currentEvent.Author == currentUserId
                     }).ToList();
             }
 
@@ -289,6 +292,9 @@ namespace EventSystem.Web.Controllers
 
         private List<CourseLectureViewModel> GetCourseLectures(int eventId)
         {
+            var currentEvent = this.events.GetById(eventId);
+            var currentUserId = User.Identity.GetUserId();
+
             return this.lectures.All().Where(x => x.EventId == eventId)
                 .Select(x => new CourseLectureViewModel
                 {
@@ -297,7 +303,8 @@ namespace EventSystem.Web.Controllers
                     LectureTitle = x.Title,
                     LectureTeacher = x.Teacher,
                     LectureDescription = x.Description,
-                    LectureDate = x.Date
+                    LectureDate = x.Date,
+                    IsCreator = currentEvent.Author == currentUserId,
                 }).ToList();
 
         }
@@ -323,7 +330,7 @@ namespace EventSystem.Web.Controllers
             string alertMsg = string.Empty;
             var currentUserId = User.Identity.GetUserId();
 
-            var currentEventAuthorUserId = this.events.All().FirstOrDefault(x => x.EventId == eventId).Author;
+            var currentEventAuthorUserId = this.events.GetById(eventId).Author;
 
             if (this.lectures.All().Any(x => x.Id == lectureId))
             {
@@ -356,13 +363,13 @@ namespace EventSystem.Web.Controllers
             string alertMsg = string.Empty;
             var currentUserId = User.Identity.GetUserId();
 
-            var currentEventAuthorUserId = this.events.All().FirstOrDefault(x => x.EventId == eventId).Author;
+            var currentEventAuthorUserId = this.events.GetById(eventId).Author;
 
             if (this.eventsUsers.All().Any(x => x.Id == eventUserId))
             {
                 if (currentEventAuthorUserId == currentUserId)
                 {
-                    this.eventsUsers.Delete(eventUserId);
+                    this.eventsUsers.GetById(eventUserId).Status = EventUserStatus.Expelled;
                     alertType = "success";
                     alertMsg = EventsResource.ExpellUserSuccess;
                     this.eventsUsers.SaveChanges();
@@ -379,6 +386,22 @@ namespace EventSystem.Web.Controllers
                 alertMsg = EventsResource.ExpellUserFailure;
             }
             return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DisplayLecture(int lectureId)
+        {
+            var lecture = lectures.GetById(lectureId);
+
+            var model = new CourseLectureViewModel
+            {
+                Id = lecture.Id,
+                LectureTitle = lecture.Title,
+                LectureDate = lecture.Date,
+                LectureDescription = lecture.Description,
+                LectureTeacher = lecture.Teacher
+            };
+
+            return PartialView(model);
         }
 
     }

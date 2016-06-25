@@ -28,7 +28,8 @@ body { padding-top: 70px; }
     body { padding-top: 0px; }
 }
 
-a:hover{
+#eventsList .grid-mvc tr:hover,
+#lecturesGridContainer .grid-mvc tr:hover{
     cursor: pointer;
     text-decoration: none;
 }

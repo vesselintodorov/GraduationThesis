@@ -243,6 +243,7 @@
     <Content Include="Grid.mvc.readme" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\lectures.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.bg.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -310,6 +311,7 @@
     <Content Include="Views\Event\AddLecture.cshtml" />
     <Content Include="Views\Event\LecturesGrid.cshtml" />
     <Content Include="Views\Event\UsersGrid.cshtml" />
+    <Content Include="Views\Event\DisplayLecture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

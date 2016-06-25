@@ -31,5 +31,7 @@ namespace EventSystem.Web.Models.Event
         public DateTime LectureDate { get; set; }
 
         public int EventId { get; set; }
+
+        public bool IsCreator { get; set; }
     }
 }

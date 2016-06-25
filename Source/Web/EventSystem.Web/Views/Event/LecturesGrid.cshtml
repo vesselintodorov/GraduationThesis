@@ -2,12 +2,21 @@
 @using GridMvc.Html
 @using Resources
 
-@Html.Grid(Model).Columns(columns =>
+@helper RenderDeleteLectureButton(EventSystem.Web.Models.Event.CourseLectureViewModel user)   //IsCreator
+{
+    if (user.IsCreator)
+    {
+        <input type="button" class="btn btn-default btnDeleteLecture" value="@Global.Delete" />
+    }
+
+}
+
+@Html.Grid(Model).Named("lecturesGrid").Columns(columns =>
            {
                columns.Add().Encoded(false).Sanitized(false).RenderValueAs(o => @<span class="lectureId hidden">@o.Id</span>);
                columns.Add(m => m.LectureTitle).Titled(Global.Title);
                columns.Add(m => m.LectureDescription).Titled(Global.Description);
                columns.Add(m => m.LectureTeacher).Titled(EventsResource.LectureTeacher);
                columns.Add(m => m.LectureDate).Titled(Global.Date);
-               columns.Add().Encoded(false).Sanitized(false).RenderValueAs(o => @<input type="button" class="btn btn-default btnDeleteLecture" value="@Global.Delete" />);
+               columns.Add().Encoded(false).Sanitized(false).RenderValueAs(o => RenderDeleteLectureButton(o));
            })

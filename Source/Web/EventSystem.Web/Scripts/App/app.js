@@ -3,18 +3,15 @@
 var app = function () {
 
     $(document).ready(function () {
-        
+
         fixJqueryValidationForChrome();
         manageCollapsableDivs();
         $('.datepicker').datetimepicker({ format: 'dd/mm/yyyy hh:ii', language: 'bg' });
         $(".browseFilter").change(onBrowseFilterControlChange);
         manageGridEvents();
-        
-
         $("#subscribeBtn").click(onEventSubscribe);
         $("#unsubscribeBtn").click(onEventUnsubscribe);
-        $(".btnDeleteLecture").click(onDeleteLecture);
-        $(".btnExpellUser").click(onDeleteLecture);
+        $(document).on("click", ".btnExpellUser", onExpellUser);
     });
 
     function fixJqueryValidationForChrome() {
@@ -28,6 +25,21 @@ var app = function () {
                     return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
                 }
             };
+        }
+        if ($.validator) {
+
+            $.validator.addMethod(
+            "date",
+            function (value, element) {
+                var bits = value.match(/([0-9]+)/gi), str;
+                if (!bits)
+                    return this.optional(element) || false;
+                str = bits[1] + '/' + bits[0] + '/' + bits[2];
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(str));
+            },
+            "Please enter a date in the format dd/mm/yyyy"
+
+            );
         }
     }
 
@@ -52,33 +64,10 @@ var app = function () {
         $("#browseForm").submit();
     }
 
-    function onAddLectureSucess() {
-        debugger;
-        showAndfadeOutElement("#addLectureContainer .alert-success");
-
-        $.ajax({
-            url: "/Event/LecturesGrid",
-            type: "POST",
-            data: { eventId: $("#EventId").val() },
-            success: function (data) {
-
-                $("#lecturesGridContainer").html(data);
-            }
-        });
-    }
-
-    function onAddLectureFailure() {
-        showAndfadeOutElement("#addLectureContainer .alert-danger");
-    }
-
-    function showAndfadeOutElement(element) {
-        $(element).show();
-        setTimeout(function () {
-            $(element).fadeOut(400);
-        }, 3000);
-    }
+    
 
     function onEventSubscribe() {
+        debugger;
         $.ajax({
             url: "/Event/SubscribeUser",
             type: "POST",
@@ -109,66 +98,52 @@ var app = function () {
                 $("#subscribeBtn").show();
                 var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
                 $("#eventMessageContainer").append(alertMessageElement);
-                
+
             },
             done: new function () {
                 setTimeout(function () {
                     $($("#eventMessageContainer .alert")).fadeOut(200);
                 }, 3000);
             }
-            
+
         });
     }
 
-    function onDeleteLecture(e) {
+    function onExpellUser() {
         $.ajax({
-            url: "/Event/DeleteLecture",
+            url: "/Event/ExpellUser",
             type: "POST",
             data: {
                 eventId: $("#EventId").val(),
-                lectureId: $(this).closest("tr").find(".lectureId").text(),
+                eventUserId: $(this).closest("tr").find(".eventUserId").text(),
             },
             success: function (data) {
-                debugger;
-                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
-                $("#lecturesGridContainer").append(alertMessageElement);
-
-            },
-            done: new function () {
-                setTimeout(function () {
-                    $($("#lecturesGridContainer .alert")).fadeOut(200);
-                }, 3000);
+                refreshUsersGridWithAlert(data.alertType, data.alertMsg);
             }
-
         });
     }
 
-    function onExpellUserFromLecture(e) {
+    function refreshUsersGridWithAlert(alertType, alertMsg) {
         $.ajax({
-            url: "/Event/DeleteLecture",
+            url: "/Event/UsersGrid",
             type: "POST",
-            data: {
-                eventId: $("#EventId").val(),
-                lectureId: $(this).closest("tr").find(".lectureId").text(),
-            },
+            data: { eventId: $("#EventId").val() },
             success: function (data) {
-                debugger;
-                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
-                $("#lecturesGridContainer").append(alertMessageElement);
 
-            },
-            done: new function () {
+                $("#usersGridContainer").html(data);
+                var alertMessageElement = "<div class='alert alert-" + alertType + "'><strong>" + alertMsg + "</strong></div>";
+                $("#usersGridContainer").append(alertMessageElement);
                 setTimeout(function () {
-                    $($("#lecturesGridContainer .alert")).fadeOut(200);
+                    $("#usersGridContainer .alert").fadeOut(200);
                 }, 3000);
             }
-
         });
     }
+
+
 
     return {
-        onAddLectureSucess: onAddLectureSucess,
-        onAddLectureFailure: onAddLectureFailure
+
     }
 
 }();
