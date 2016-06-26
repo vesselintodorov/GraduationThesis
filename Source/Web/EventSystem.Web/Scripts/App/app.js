@@ -6,6 +6,12 @@ var app = function () {
 
         fixJqueryValidationForChrome();
         manageCollapsableDivs();
+        $("#addEventContainer #Type").change(onAddEventTypeChange);
+        //$('.daterangepicker').daterangepicker({
+        //    locale: {
+        //        format: 'DD/MM/YYYY'
+        //    }
+        //});
         $('.datepicker').datetimepicker({ format: 'dd/mm/yyyy hh:ii', language: 'bg' });
         $(".browseFilter").change(onBrowseFilterControlChange);
         manageGridEvents();
@@ -41,6 +47,18 @@ var app = function () {
 
             );
         }
+    }
+
+    function onAddEventTypeChange() {
+        debugger;
+        $.ajax({
+            url: "/Event/AddEventDatePicker",
+            type: "POST",
+            data: { eventTypeId: $(this).val() },
+            success: function (data) {
+                $("#eventTypeContainer").html(data);
+            }
+        });
     }
 
     function manageGridEvents() {

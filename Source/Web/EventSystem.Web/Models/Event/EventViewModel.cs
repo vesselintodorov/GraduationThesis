@@ -28,7 +28,7 @@ namespace EventSystem.Web.Models.Event
 
 
         [ResourcesDisplayName("EndDate", NameResourceType = typeof(Global))]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [ResourcesDisplayName("Description", NameResourceType = typeof(Global))]
         public string ShortDescription { get; set; }

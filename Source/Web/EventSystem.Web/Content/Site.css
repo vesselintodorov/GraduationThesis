@@ -37,3 +37,9 @@ body { padding-top: 70px; }
 .field-validation-error span {
     color:#ff0000 !important;
 }
+
+input.daterangepicker {
+    position: initial !important;
+    width: inherit;
+    padding-left: 12px;
+}

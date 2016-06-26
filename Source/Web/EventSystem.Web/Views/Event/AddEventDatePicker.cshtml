@@ -1,0 +1,33 @@
+﻿@{
+    var currentType = (EventSystem.Data.Common.Enums.EventType)ViewBag.EventTypeId;
+}
+
+<script>
+    $(document).ready(function () {
+        $('.daterangepicker').daterangepicker({
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        });
+        $('.datepicker').datetimepicker({ format: 'dd/mm/yyyy hh:ii', language: 'bg' });
+    });
+</script>
+@if (currentType == EventSystem.Data.Common.Enums.EventType.Course)
+{
+    // DATE RANGE PICKER
+    <div class="form-group">
+        @Html.Label("DateRange", Resources.Global.Date, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBox("DateRange", DateTime.Now.ToString("dd/MM/yyyy") + " - " +  DateTime.Now.AddMonths(1).ToString("dd/MM/yyyy"), string.Empty, new { @class = "form-control daterangepicker", placeholder = "Enter start date..." })
+        </div>
+    </div>
+}
+else
+{
+    <div class="form-group">
+        @Html.Label("StartDate", Resources.Global.Date, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBox("StartDate", DateTime.Now.ToString("dd/MM/yyyy HH:mm"), string.Empty, new { @class = "form-control datepicker", placeholder = "Enter start date..." })
+        </div>
+    </div>
+}

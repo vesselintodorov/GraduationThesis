@@ -31,11 +31,13 @@ namespace EventSystem.Web.Models.Event
         public DateTime StartDate { get; set; }
 
 
-        [Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEndDate")]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy hh:ii}")]
-        [DataType(DataType.Date)]
-        [ResourcesDisplayName("EndDate", NameResourceType = typeof(Global))]
-        public DateTime EndDate { get; set; }
+        //[Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEndDate")]
+        //[DisplayFormat(DataFormatString = "{0:dd/mm/yyyy hh:ii}")]
+        //[DataType(DataType.Date)]
+        //[ResourcesDisplayName("EndDate", NameResourceType = typeof(Global))]
+        //public DateTime? EndDate { get; set; }
+
+        public string DateRange { get; set; }
 
 
     }

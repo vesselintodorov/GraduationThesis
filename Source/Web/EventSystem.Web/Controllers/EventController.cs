@@ -42,14 +42,22 @@ namespace EventSystem.Web.Controllers
             {
                 var currentEvent = new Event
                 {
-                    //Author = User.Identity.GetFirstName() + " " + User.Identity.GetLastName(),
                     Author = User.Identity.GetUserId(),
                     Title = model.Title,
                     Type = model.Type,
-                    Description = model.Description,
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate
+                    Description = model.Description
                 };
+
+                if (model.Type == EventType.Course)
+                {
+                    var dateRange = model.DateRange.Split(new char[] { '-', }, StringSplitOptions.RemoveEmptyEntries);
+                    currentEvent.StartDate = Convert.ToDateTime(dateRange[0]);
+                    currentEvent.EndDate = Convert.ToDateTime(dateRange[1]);
+                }
+                else
+                {
+                    currentEvent.StartDate = model.StartDate;
+                }
 
                 this.events.Add(currentEvent);
                 this.events.SaveChanges();
@@ -402,6 +410,12 @@ namespace EventSystem.Web.Controllers
             };
 
             return PartialView(model);
+        }
+
+        public ActionResult AddEventDatePicker(int eventTypeId)
+        {
+            ViewBag.EventTypeId = eventTypeId;
+            return PartialView();
         }
 
     }
