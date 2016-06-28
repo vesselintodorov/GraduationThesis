@@ -43,3 +43,14 @@ input.daterangepicker {
     width: inherit;
     padding-left: 12px;
 }
+
+.glyphicon-style-width {
+    font-size: 1.2em;
+}
+
+/*.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -35px;
+  }*/

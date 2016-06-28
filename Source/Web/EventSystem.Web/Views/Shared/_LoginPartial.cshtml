@@ -2,22 +2,37 @@
 @using EventSystem.Web.Extensions
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+
+    using (Html.BeginForm("Logoff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetFirstName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" title="@Resources.Global.UpcomingEvents"><span class="glyphicon glyphicon-comment glyphicon-style-width" aria-hidden="true"></span></a>
+            <ul id="notifications" class="dropdown-menu">
+            </ul>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li>
+            <a href="@Url.Action("Index", "Manage")" title="@Resources.Global.Profile"><span class='glyphicon glyphicon-user glyphicon-style-width' aria-hidden='true' style='font-size: 1.2em;'></span></a>
+            @*@Html.ActionLink("Manage", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" title="@Resources.Global.Logout"><span class='glyphicon glyphicon-off glyphicon-style-width' aria-hidden='true' style='font-size: 1.2em;'></span></a></li>
     </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>
+            @Html.ActionLink(Resources.Global.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+            @*<a href="@Url.Action("Register", "Account")" id="registerLink"><span class='glyphicon glyphicon-log-in glyphicon-style-width' aria-hidden='true' style='font-size: 1.2em;'></span>@Resources.Global.Register</a>*@
+        </li>
+        <li>
+            @Html.ActionLink(Resources.Global.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            @*<a href="@Url.Action("Login", "Account")" id="loginLink"><span class='glyphicon glyphicon-plus glyphicon-style-width' aria-hidden='true' style='font-size: 1.2em;'></span>@Resources.Global.Login</a>*@
+        
+        
+        </li>
     </ul>
 }

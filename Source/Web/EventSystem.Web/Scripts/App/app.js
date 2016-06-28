@@ -6,12 +6,8 @@ var app = function () {
 
         fixJqueryValidationForChrome();
         manageCollapsableDivs();
+        getNotificationsDdlData();
         $("#addEventContainer #Type").change(onAddEventTypeChange);
-        //$('.daterangepicker').daterangepicker({
-        //    locale: {
-        //        format: 'DD/MM/YYYY'
-        //    }
-        //});
         $('.datepicker').datetimepicker({ format: 'dd/mm/yyyy hh:ii', language: 'bg' });
         $(".browseFilter").change(onBrowseFilterControlChange);
         manageGridEvents();
@@ -49,6 +45,27 @@ var app = function () {
         }
     }
 
+    function getNotificationsDdlData() {
+        debugger;
+        $.ajax({
+            url: "/Common/GetNotificationsData",
+            type: "POST",
+            data: {},
+            success: function (data) {
+                debugger;
+                $("#notifications li").remove();
+                $(data).each(function () {
+                    debugger;
+                    $("#notifications").append("<li><a href='/Event/Display/?eventId=" + this.Id + "'>" + this.Title + "</a></li>")
+                });
+
+                //$($.parseJSON(data)).map(function () {
+                //    return $("<li><a href='/Event/Display/?eventId=" + this.Id + "'>" + this.Title + "</a></li>");
+                //}).appendTo('#notifications');
+            }
+        });
+    }
+
     function onAddEventTypeChange() {
         debugger;
         $.ajax({
@@ -82,7 +99,7 @@ var app = function () {
         $("#browseForm").submit();
     }
 
-    
+
 
     function onEventSubscribe() {
         debugger;

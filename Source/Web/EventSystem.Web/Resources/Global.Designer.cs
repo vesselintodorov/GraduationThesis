@@ -214,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Известия.
+        /// </summary>
+        public static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Парола.
         /// </summary>
         public static string Password {
@@ -228,6 +237,15 @@ namespace Resources {
         public static string PasswordMismatch {
             get {
                 return ResourceManager.GetString("PasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Профил.
+        /// </summary>
+        public static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
             }
         }
         
@@ -349,6 +367,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ТУ Събития.
+        /// </summary>
+        public static string TUEvents {
+            get {
+                return ResourceManager.GetString("TUEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тип.
         /// </summary>
         public static string Type {
@@ -363,6 +390,15 @@ namespace Resources {
         public static string Unsubscribe {
             get {
                 return ResourceManager.GetString("Unsubscribe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Наближаващи събития.
+        /// </summary>
+        public static string UpcomingEvents {
+            get {
+                return ResourceManager.GetString("UpcomingEvents", resourceCulture);
             }
         }
         
