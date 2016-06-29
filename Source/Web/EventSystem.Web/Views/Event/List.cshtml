@@ -4,11 +4,11 @@
 @Html.Grid(Model).Named("browseEventsGrid").Columns(columns =>
            {
                columns.Add(m => m.Id, true);
-               columns.Add(m => m.Title);
-               columns.Add(m => m.Type);
-               columns.Add(m => m.ShortDescription);
-               columns.Add(m => m.StartDate);
-               columns.Add(m => m.EndDate);
+               columns.Add(m => m.Title).Filterable(true);
+               columns.Add(m => m.Type).Filterable(true);
+               columns.Add(m => m.ShortDescription).Filterable(true);
+               columns.Add(m => m.StartDate).Filterable(true);
+               columns.Add(m => m.EndDate).Filterable(true);
            }).WithPaging(20)
 
 

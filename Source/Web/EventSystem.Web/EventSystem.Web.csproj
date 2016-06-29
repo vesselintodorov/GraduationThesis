@@ -193,8 +193,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
-    <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -211,6 +211,11 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\EventsTypes.Designer.cs">
+      <DependentUpon>EventsTypes.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\EventsResource.Designer.cs">
       <DependentUpon>EventsResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -329,11 +334,12 @@
     <Content Include="Views\Event\UsersGrid.cshtml" />
     <Content Include="Views\Event\DisplayLecture.cshtml" />
     <Content Include="Views\Event\AddEventDatePicker.cshtml" />
+    <Content Include="Views\Event\UserEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Common\" />
-    <Folder Include="Views\Display\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -353,6 +359,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\EventsTypes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EventsTypes.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\EventsResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EventsResource.Designer.cs</LastGenOutput>

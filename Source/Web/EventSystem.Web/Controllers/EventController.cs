@@ -11,10 +11,11 @@ using Microsoft.AspNet.Identity;
 using EventSystem.Web.Models;
 using System.Net;
 using EventSystem.Data.Common.Enums;
+using System.Resources;
 
 namespace EventSystem.Web.Controllers
 {
-    public class EventController : Controller
+    public class EventController : BaseController
     {
         private IRepository<Event> events;
         private IRepository<Lecture> lectures;
@@ -31,8 +32,17 @@ namespace EventSystem.Web.Controllers
         [Authorize]
         public ActionResult Add()
         {
-            return View();
+            var model = new AddEventInputModel();
+            model.TypesData = Enum.GetValues(typeof(EventType)).Cast<EventType>().Select(x => new SelectListItem
+            {
+                Text = base.GetLocalizedEventTypeString(x),
+                Value = ((int)x).ToString()
+            }).ToList();
+
+            return View(model);
         }
+
+        
 
         [HttpPost]
         [Authorize]
@@ -112,6 +122,11 @@ namespace EventSystem.Web.Controllers
         public ActionResult Browse()
         {
             var browseFilterModel = new BrowseFilterInputModel();
+            browseFilterModel.TypesData = Enum.GetValues(typeof(EventType)).Cast<EventType>().Select(x => new SelectListItem
+            {
+                Text = base.GetLocalizedEventTypeString(x),
+                Value = ((int)x).ToString()
+            }).ToList();
 
             return View(browseFilterModel);
         }
@@ -120,6 +135,11 @@ namespace EventSystem.Web.Controllers
         public ActionResult List(BrowseFilterInputModel browseFilterModel)
         {
             var events = this.events.All().Where(x => !x.IsFinished);
+
+            if (!string.IsNullOrWhiteSpace(browseFilterModel.SearchedEventName))
+            {
+                events = events.Where(x => x.Title.ToLower().Contains(browseFilterModel.SearchedEventName.ToLower()));
+            }
 
             if (browseFilterModel.Type != null)
             {
@@ -420,5 +440,23 @@ namespace EventSystem.Web.Controllers
             return PartialView();
         }
 
+        public ActionResult UserEvents()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var currentUserEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId).ToList();
+
+            var model = currentUserEvents.Select(x => new EventViewModel
+            {
+                Id = x.EventId.EventId,
+                Title = x.EventId.Title,
+                Type = x.EventId.Type,
+                ShortDescription = x.EventId.Description,
+                StartDate = x.EventId.StartDate,
+                EndDate = x.EventId.EndDate
+            });
+
+
+            return View(model);
+        }
     }
 }

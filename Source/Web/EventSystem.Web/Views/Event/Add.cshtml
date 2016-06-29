@@ -37,13 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Type,
-            Enum.GetNames(typeof(EventSystem.Data.Common.Enums.EventType))
-            .Select(e => new SelectListItem
-            {
-                Text = e,
-                Value = ((int)Enum.Parse(typeof(EventSystem.Data.Common.Enums.EventType), e)).ToString()
-            }), new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Type, Model.TypesData, new { @class = "form-control" })
 
             </div>
         </div>

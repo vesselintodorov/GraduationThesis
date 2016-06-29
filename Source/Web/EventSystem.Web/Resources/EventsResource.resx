@@ -189,8 +189,8 @@
   <data name="RequiredType" xml:space="preserve">
     <value>Моля въведете тип на събитието.</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="SelectEvent" xml:space="preserve">
+    <value>Изберете събитие</value>
   </data>
   <data name="AddLectureSuccess" xml:space="preserve">
     <value>Успешно добавена лекция за конкретния курс!</value>

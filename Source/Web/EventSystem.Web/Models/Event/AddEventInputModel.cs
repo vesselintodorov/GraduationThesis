@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace EventSystem.Web.Models.Event
 {
@@ -29,6 +30,8 @@ namespace EventSystem.Web.Models.Event
         [DataType(DataType.Date)]
         [ResourcesDisplayName("StartDate", NameResourceType = typeof(Global))]
         public DateTime StartDate { get; set; }
+
+        public List<SelectListItem> TypesData { get; set; } 
 
 
         //[Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEndDate")]

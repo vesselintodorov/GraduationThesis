@@ -19,5 +19,7 @@ namespace EventSystem.Web.Models.Common
 
         public int MinutesRemaining { get; set; }
 
+        public string TypeMessage { get; set; }
+
     }
 }

@@ -117,142 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>Добави</value>
+  <data name="Conference" xml:space="preserve">
+    <value>Конференция</value>
   </data>
-  <data name="AddEventPageMsg" xml:space="preserve">
-    <value>Конфигурирайте и добавете събитие.</value>
+  <data name="Course" xml:space="preserve">
+    <value>Курс</value>
   </data>
-  <data name="Attendees" xml:space="preserve">
-    <value>Участници</value>
+  <data name="Lecture" xml:space="preserve">
+    <value>Лекция</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Потвърди паролата</value>
+  <data name="Meeting" xml:space="preserve">
+    <value>Среща</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>Дата</value>
+  <data name="PressConference" xml:space="preserve">
+    <value>Пресконференция</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Изтрий</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Описание</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Мейл</value>
-  </data>
-  <data name="EndDate" xml:space="preserve">
-    <value>Крайна дата</value>
-  </data>
-  <data name="EventInfo" xml:space="preserve">
-    <value>Информация за събитието</value>
-  </data>
-  <data name="Expell" xml:space="preserve">
-    <value>Изключи</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Име</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Начало</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Фамилия</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Влез</value>
-  </data>
-  <data name="LoginPageMsg" xml:space="preserve">
-    <value>Влезнете с вашият мейл и парола.</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Излез</value>
-  </data>
-  <data name="Notifications" xml:space="preserve">
-    <value>Известия</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Парола</value>
-  </data>
-  <data name="PasswordMismatch" xml:space="preserve">
-    <value>Въведените пароли не съвпадат.</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Профил</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Регистриране</value>
-  </data>
-  <data name="RegisterNewUser" xml:space="preserve">
-    <value>Регистрирайте нов потребител.</value>
-  </data>
-  <data name="RegisterPageMsg" xml:space="preserve">
-    <value>Регистриране на нов потребител.</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Запомни ме</value>
-  </data>
-  <data name="RequiredEmail" xml:space="preserve">
-    <value>Моля въведете валиден мейл адрес.</value>
-  </data>
-  <data name="RequiredEndDate" xml:space="preserve">
-    <value>Моля въведете крайна дата.</value>
-  </data>
-  <data name="RequiredFirstName" xml:space="preserve">
-    <value>Моля въведете име.</value>
-  </data>
-  <data name="RequiredLastName" xml:space="preserve">
-    <value>Моля въведете фамилия.</value>
-  </data>
-  <data name="RequiredPassword" xml:space="preserve">
-    <value>Моля въведете парола с минимум 6 символа.</value>
-  </data>
-  <data name="RequiredStartDate" xml:space="preserve">
-    <value>Моля въведете начална дата.</value>
-  </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>Начална дата</value>
-  </data>
-  <data name="Subscribe" xml:space="preserve">
-    <value>Запиши</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Заглавие</value>
-  </data>
-  <data name="TUEvents" xml:space="preserve">
-    <value>ТУ Събития</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Тип</value>
-  </data>
-  <data name="Unsubscribe" xml:space="preserve">
-    <value>Отпиши</value>
-  </data>
-  <data name="UpcomingEvents" xml:space="preserve">
-    <value>Наближаващи събития</value>
-  </data>
-  <data name="ValidDate" xml:space="preserve">
-    <value>Моля въведете валидна дата във формат ден/месец/година час/минути/секунди.</value>
-  </data>
-  <data name="NoNotifications" xml:space="preserve">
-    <value>Нямате предстоящи събития.</value>
-  </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Разгледай</value>
-  </data>
-  <data name="MyEvents" xml:space="preserve">
-    <value>Моите събития</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="EnterEndDate" xml:space="preserve">
-    <value>Изберете крайна дата</value>
-  </data>
-  <data name="EnterStartDate" xml:space="preserve">
-    <value>Изберете начална дата</value>
-  </data>
-  <data name="From" xml:space="preserve">
-    <value>от</value>
+  <data name="Seminar" xml:space="preserve">
+    <value>Семинар</value>
   </data>
 </root>

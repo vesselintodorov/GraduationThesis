@@ -331,11 +331,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Изберете събитие.
         /// </summary>
-        public static string String1 {
+        public static string SelectEvent {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("SelectEvent", resourceCulture);
             }
         }
     }

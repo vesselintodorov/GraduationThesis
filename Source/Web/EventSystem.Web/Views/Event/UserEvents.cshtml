@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EventSystem.Web.Models.Event.EventViewModel>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "UserEvents";
+}
+
+<h2>MyEvents</h2>
+
+
+@Html.Grid(Model).Named("userEventsGrid").Columns(columns =>
+           {
+               columns.Add(m => m.Id, true);
+               columns.Add(m => m.Title);
+               columns.Add(m => m.Type);
+               columns.Add(m => m.ShortDescription);
+               columns.Add(m => m.StartDate);
+               columns.Add(m => m.EndDate);
+           }).WithPaging(20)
+
+
+@*<script>
+        $(function () {
+            pageGrids.browseEventsGrid.onRowSelect(function (e) {
+                alert(e.row.OrderID);
+            });
+        });
+    </script>*@
+
+

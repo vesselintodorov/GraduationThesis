@@ -9,11 +9,13 @@ using Microsoft.AspNet.Identity;
 using EventSystem.Web.Models.Common;
 using EventSystem.Web.Models.Event;
 using System.Data.Entity;
+using EventSystem.Data.Common.Enums;
+using Resources;
 
 
 namespace EventSystem.Web.Controllers
 {
-    public class CommonController : Controller
+    public class CommonController : BaseController
     {
         private IRepository<EventUser> eventsUsers;
         private IRepository<Lecture> lectures;
@@ -32,12 +34,8 @@ namespace EventSystem.Web.Controllers
 
             var currentUserIds = this.eventsUsers.All().Where(x => x.UserID == currentUserId).Select(x => x.EventID).ToList(); ;
 
-            //TimeSpan diff = secondDate - firstDate;
-            //double hours = diff.TotalHours;
-            //
             var upcomingEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId && DbFunctions.DiffHours(DateTime.Now, x.EventId.StartDate) < 24 && DbFunctions.DiffMinutes(DateTime.Now, x.EventId.StartDate) > 0).ToList();
 
-            // && (DateTime.Now - x.Date).Hours < 24 && (DateTime.Now - x.Date).Hours > 1
             var upcomingLectures = this.lectures.All().Where(x => currentUserIds.Contains(x.EventId) && DbFunctions.DiffHours(DateTime.Now, x.Date) < 24 && DbFunctions.DiffMinutes(DateTime.Now, x.Date) > 0).Select(x => new CourseLectureViewModel
             {
                 Id = x.Id,
@@ -45,7 +43,6 @@ namespace EventSystem.Web.Controllers
                 LectureDate = x.Date,
                 LectureTitle = x.Title
             });
-            //var lectures = lectures.
 
             foreach (var ev in upcomingEvents)
             {
@@ -56,7 +53,8 @@ namespace EventSystem.Web.Controllers
                     StartDate = ev.EventId.StartDate,
                     LectureId = 0,
                     HoursRemaining = (ev.EventId.StartDate - DateTime.Now).Hours,
-                    MinutesRemaining = (ev.EventId.StartDate - DateTime.Now).Minutes
+                    MinutesRemaining = (ev.EventId.StartDate - DateTime.Now).Minutes,
+                    TypeMessage = base.GetLocalizedEventTypeString(ev.EventId.Type)
                 });
             }
 
@@ -65,11 +63,12 @@ namespace EventSystem.Web.Controllers
                 notificationsData.Add(new NotificationsModel
                 {
                     Id = lecture.EventId,
-                    Title = "Лекция " + lecture.LectureTitle,
+                    Title = lecture.LectureTitle,
                     StartDate = lecture.LectureDate,
                     LectureId = lecture.Id,
                     HoursRemaining = (lecture.LectureDate - DateTime.Now).Hours,
-                    MinutesRemaining = (lecture.LectureDate - DateTime.Now).Minutes
+                    MinutesRemaining = (lecture.LectureDate - DateTime.Now).Minutes,
+                    TypeMessage = string.Format("{0} {1} {2}",EventsTypes.Lecture, Global.From, EventsTypes.Course)
                 });
             }
 

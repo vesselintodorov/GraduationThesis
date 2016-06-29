@@ -15,6 +15,7 @@ var app = function () {
         $("#unsubscribeBtn").click(onEventUnsubscribe);
         bindExternalLectureOpen();
         $(document).on("click", ".btnExpellUser", onExpellUser);
+        $("#SearchedEventName").focusout(onSearchEventBoxFocusOut);
     });
 
     function bindExternalLectureOpen() {
@@ -76,7 +77,11 @@ var app = function () {
                     $(data).each(function () {
                         debugger;
 
-                        var currentItem = "<li><a href='/Event/Display/?eventId=" + this.Id + "&lectureId=" + this.LectureId + "'><i " + (this.LectureId == 0 ? "class='fa fa-calendar'" : "class='fa fa-calendar-o'") + ' aria-hidden="true"></i> ' + this.Title + "<div class='notificationTimeRemaining text-danger'>след " + (this.HoursRemaining > 0 ? this.HoursRemaining + " часа и " : "") + this.MinutesRemaining + " минути</div></a></li>"
+                        var currentItem = "<li><a href='/Event/Display/?eventId=" + this.Id + "&lectureId=" + this.LectureId
+                            + "'><i " + (this.LectureId == 0 ? "class='fa fa-calendar'" : "class='fa fa-calendar-o'")
+                            + ' aria-hidden="true"></i> ' + this.Title + "<div class='notificationSecondaryText text-danger'>след "
+                            + (this.HoursRemaining > 0 ? + this.HoursRemaining + (this.HoursRemaining == 1 ? " час" : " часа") + " и " : "") + this.MinutesRemaining
+                            + " минути</div><div class='notificationSecondaryText'><strong>" + this.TypeMessage + "</strong></div></a></li>"
 
                         //<i class="fa fa-calendar-o" aria-hidden="true"></i>
                         //if (this.HoursRemaining > 0) {
@@ -206,6 +211,9 @@ var app = function () {
         });
     }
 
+    function onSearchEventBoxFocusOut() {
+        $("#browseForm").submit();
+    }
 
 
     return {
