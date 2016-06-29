@@ -9,15 +9,16 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" title="@Resources.Global.UpcomingEvents"><span class="glyphicon glyphicon-comment glyphicon-style-width" aria-hidden="true"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" title="@Resources.Global.UpcomingEvents"><span class="glyphicon glyphicon-flag glyphicon-style-width" aria-hidden="true"></span></a>
             <ul id="notifications" class="dropdown-menu">
+                <li id="noNotifications" class="text-center">@Resources.Global.NoNotifications</li>
             </ul>
         </li>
         <li>
-            <a href="@Url.Action("Index", "Manage")" title="@Resources.Global.Profile"><span class='glyphicon glyphicon-user glyphicon-style-width' aria-hidden='true' style='font-size: 1.2em;'></span></a>
+            <a href="@Url.Action("Index", "Manage")" title="@Resources.Global.Profile"><span class='glyphicon glyphicon-user glyphicon-style-width' aria-hidden='true'></span></a>
             @*@Html.ActionLink("Manage", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()" title="@Resources.Global.Logout"><span class='glyphicon glyphicon-off glyphicon-style-width' aria-hidden='true' style='font-size: 1.2em;'></span></a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" title="@Resources.Global.Logout"><span class='glyphicon glyphicon-off glyphicon-style-width' aria-hidden='true'></span></a></li>
     </ul>
     }
 }

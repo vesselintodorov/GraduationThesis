@@ -13,8 +13,24 @@ var app = function () {
         manageGridEvents();
         $("#subscribeBtn").click(onEventSubscribe);
         $("#unsubscribeBtn").click(onEventUnsubscribe);
+        bindExternalLectureOpen();
         $(document).on("click", ".btnExpellUser", onExpellUser);
     });
+
+    function bindExternalLectureOpen() {
+        if ($("#ExternallySelectedLectureId").val() > 0) {
+            $.ajax({
+                url: "/Event/DisplayLecture",
+                type: "POST",
+                data: { lectureId: $("#ExternallySelectedLectureId").val() },
+                success: function (data) {
+                    debugger;
+                    $("#lectureModalContainer").html(data);
+                    $('#lectureModal').modal('show');
+                }
+            });
+        }
+    }
 
     function fixJqueryValidationForChrome() {
         if (jQuery.validator) {
@@ -53,12 +69,27 @@ var app = function () {
             data: {},
             success: function (data) {
                 debugger;
-                $("#notifications li").remove();
-                $(data).each(function () {
+                $("#notifications li:not(:first)").remove();
+                if (data.length > 0) {
                     debugger;
-                    $("#notifications").append("<li><a href='/Event/Display/?eventId=" + this.Id + "'>" + this.Title + "</a></li>")
-                });
+                    $("li#noNotifications").hide();
+                    $(data).each(function () {
+                        debugger;
 
+                        var currentItem = "<li><a href='/Event/Display/?eventId=" + this.Id + "&lectureId=" + this.LectureId + "'><i " + (this.LectureId == 0 ? "class='fa fa-calendar'" : "class='fa fa-calendar-o'") + ' aria-hidden="true"></i> ' + this.Title + "<div class='notificationTimeRemaining text-danger'>след " + (this.HoursRemaining > 0 ? this.HoursRemaining + " часа и " : "") + this.MinutesRemaining + " минути</div></a></li>"
+
+                        //<i class="fa fa-calendar-o" aria-hidden="true"></i>
+                        //if (this.HoursRemaining > 0) {
+                        //    $("#notifications").append("<li><a href='/Event/Display/?eventId=" + this.Id + "&lectureId=" + this.LectureId + "'>" + this.Title + "<div class='notificationTimeRemaining text-danger'>след " +  this.HoursRemaining + " часа и " + this.MinutesRemaining + " минути</div></a></li>")
+                        //} else {
+                        //    $("#notifications").append("<li><a href='/Event/Display/?eventId=" + this.Id + "&lectureId=" + this.LectureId + "'>" + this.Title + "<div class='notificationTimeRemaining text-danger'>след " +  this.MinutesRemaining + " минути</div></a></li>")
+                        //}
+                        $("#notifications").append(currentItem);
+                    });
+                } else {
+                    debugger;
+                    $("li#noNotifications").show();
+                }
                 //$($.parseJSON(data)).map(function () {
                 //    return $("<li><a href='/Event/Display/?eventId=" + this.Id + "'>" + this.Title + "</a></li>");
                 //}).appendTo('#notifications');

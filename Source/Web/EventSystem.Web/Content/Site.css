@@ -23,19 +23,24 @@ textarea {
     max-width: 280px;
 }
 
-body { padding-top: 70px; }
+body {
+    padding-top: 70px;
+}
+
 @media screen and (max-width: 768px) {
-    body { padding-top: 0px; }
+    body {
+        padding-top: 0px;
+    }
 }
 
 #eventsList .grid-mvc tr:hover,
-#lecturesGridContainer .grid-mvc tr:hover{
+#lecturesGridContainer .grid-mvc tr:hover {
     cursor: pointer;
     text-decoration: none;
 }
 
 .field-validation-error span {
-    color:#ff0000 !important;
+    color: #ff0000 !important;
 }
 
 input.daterangepicker {
@@ -45,12 +50,9 @@ input.daterangepicker {
 }
 
 .glyphicon-style-width {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
-/*.badge-notify{
-   background:red;
-   position:relative;
-   top: -20px;
-   left: -35px;
-  }*/
+.notificationTimeRemaining {
+    font-size:0.8em;
+}

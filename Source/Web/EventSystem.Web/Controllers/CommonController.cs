@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using EventSystem.Web.Models.Common;
 using EventSystem.Web.Models.Event;
+using System.Data.Entity;
 
 
 namespace EventSystem.Web.Controllers
@@ -31,11 +32,13 @@ namespace EventSystem.Web.Controllers
 
             var currentUserIds = this.eventsUsers.All().Where(x => x.UserID == currentUserId).Select(x => x.EventID).ToList(); ;
 
-            //&& (DateTime.Now - x.EventId.StartDate).Hours < 24 && (DateTime.Now - x.EventId.StartDate).Hours > 1
-            var upcomingEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId).ToList();
+            //TimeSpan diff = secondDate - firstDate;
+            //double hours = diff.TotalHours;
+            //
+            var upcomingEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId && DbFunctions.DiffHours(DateTime.Now, x.EventId.StartDate) < 24 && DbFunctions.DiffMinutes(DateTime.Now, x.EventId.StartDate) > 0).ToList();
 
             // && (DateTime.Now - x.Date).Hours < 24 && (DateTime.Now - x.Date).Hours > 1
-            var upcomingLectures = this.lectures.All().Where(x => currentUserIds.Contains(x.EventId)).Select(x => new CourseLectureViewModel
+            var upcomingLectures = this.lectures.All().Where(x => currentUserIds.Contains(x.EventId) && DbFunctions.DiffHours(DateTime.Now, x.Date) < 24 && DbFunctions.DiffMinutes(DateTime.Now, x.Date) > 0).Select(x => new CourseLectureViewModel
             {
                 Id = x.Id,
                 EventId = x.EventId,
@@ -51,7 +54,9 @@ namespace EventSystem.Web.Controllers
                     Id = ev.EventID,
                     Title = ev.EventId.Title,
                     StartDate = ev.EventId.StartDate,
-                    LectureId = 0
+                    LectureId = 0,
+                    HoursRemaining = (ev.EventId.StartDate - DateTime.Now).Hours,
+                    MinutesRemaining = (ev.EventId.StartDate - DateTime.Now).Minutes
                 });
             }
 
@@ -62,7 +67,9 @@ namespace EventSystem.Web.Controllers
                     Id = lecture.EventId,
                     Title = "Лекция " + lecture.LectureTitle,
                     StartDate = lecture.LectureDate,
-                    LectureId = lecture.Id
+                    LectureId = lecture.Id,
+                    HoursRemaining = (lecture.LectureDate - DateTime.Now).Hours,
+                    MinutesRemaining = (lecture.LectureDate - DateTime.Now).Minutes
                 });
             }
 

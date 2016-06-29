@@ -234,4 +234,7 @@
   <data name="ValidDate" xml:space="preserve">
     <value>Моля въведете валидна дата във формат ден/месец/година час/минути/секунди.</value>
   </data>
+  <data name="NoNotifications" xml:space="preserve">
+    <value>Нямате предстоящи събития.</value>
+  </data>
 </root>

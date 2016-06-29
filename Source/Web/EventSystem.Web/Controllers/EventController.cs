@@ -69,7 +69,7 @@ namespace EventSystem.Web.Controllers
         }
 
         [Authorize]
-        public ActionResult Display(int eventId)
+        public ActionResult Display(int eventId, int? lectureId)
         {
             //var currentEvent = this.events.All().FirstOrDefault(x => x.EventId == eventId);
             var currentEvent = this.events.GetById(eventId);
@@ -95,6 +95,8 @@ namespace EventSystem.Web.Controllers
                     IsCreator = currentEvent.Author == User.Identity.GetUserId(),
                     IsUserEnrolled = CheckIfCurrentUserIsEnrolledInEvent(eventId, User.Identity.GetUserId())
                 };
+
+            model.ExternallySelectedLectureId = lectureId.HasValue ? lectureId.Value : 0;
 
             return View(model);
         }
@@ -237,7 +239,7 @@ namespace EventSystem.Web.Controllers
                 this.eventsUsers.SaveChanges();
             }
 
-            
+
             return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
         }
 

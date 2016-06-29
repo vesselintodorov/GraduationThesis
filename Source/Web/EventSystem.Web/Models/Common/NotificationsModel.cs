@@ -14,5 +14,10 @@ namespace EventSystem.Web.Models.Common
         public int LectureId { get; set; }
 
         public DateTime StartDate { get; set; }
+
+        public int HoursRemaining { get; set; }
+
+        public int MinutesRemaining { get; set; }
+
     }
 }

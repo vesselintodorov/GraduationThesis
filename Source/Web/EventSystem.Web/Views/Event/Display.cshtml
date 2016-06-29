@@ -5,6 +5,7 @@
 }
 
 @Html.Hidden("EventId", Model.Id)
+@Html.HiddenFor(m => m.ExternallySelectedLectureId)
 
 
 <div id="displayEventContainer" class="">
