@@ -54,5 +54,19 @@ input.daterangepicker {
 }
 
 .notificationSecondaryText {
-    font-size:0.8em;
+    font-size: 0.8em;
+}
+
+.badge-notify {
+    background: red;
+    position: relative;
+    top: -20px;
+    left: -8px;
+    font-size: 0.7em;
+}
+
+.badge-hidden {
+    /*color: transparent !important;
+    background-color: transparent !important;*/
+    visibility: hidden;
 }

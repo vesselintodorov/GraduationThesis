@@ -114,7 +114,7 @@ namespace EventSystem.Web.Controllers
         private bool CheckIfCurrentUserIsEnrolledInEvent(int eventId, string userId)
         {
             var currentUserId = User.Identity.GetUserId();
-            return this.eventsUsers.All().Any(x => x.EventID == eventId && x.UserID == currentUserId);
+            return this.eventsUsers.All().Any(x => x.EventID == eventId && x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled);
         }
 
 
@@ -443,7 +443,7 @@ namespace EventSystem.Web.Controllers
         public ActionResult UserEvents()
         {
             var currentUserId = User.Identity.GetUserId();
-            var currentUserEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId).ToList();
+            var currentUserEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled).ToList();
 
             var model = currentUserEvents.Select(x => new EventViewModel
             {

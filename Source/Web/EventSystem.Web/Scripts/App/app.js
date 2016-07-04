@@ -16,7 +16,16 @@ var app = function () {
         bindExternalLectureOpen();
         $(document).on("click", ".btnExpellUser", onExpellUser);
         $("#SearchedEventName").focusout(onSearchEventBoxFocusOut);
+        $(".notificationsBtn").click(onNotificationsBtnClick);
     });
+
+    function onNotificationsBtnClick() {
+        sessionStorage.setItem("IsUserNotified", "true");
+        sessionStorage.setItem("NotificationsCount", "0");
+        $(".badge-notify").addClass("badge-hidden");
+        //$(".badge-notify").text("");
+
+    }
 
     function bindExternalLectureOpen() {
         if ($("#ExternallySelectedLectureId").val() > 0) {
@@ -73,6 +82,21 @@ var app = function () {
                 $("#notifications li:not(:first)").remove();
                 if (data.length > 0) {
                     debugger;
+
+                    if (sessionStorage.getItem("IsUserNotified") != "true") {
+                        $(".badge-notify").removeClass("badge-hidden");
+                        if (parseInt(sessionStorage.getItem("NotificationsCount")) > 0) {
+                            $(".badge-notify").text(sessionStorage.getItem("NotificationsCount"));
+                        }
+                        else {
+                            $(".badge-notify").text(data.length);
+                        }
+                    }
+                    else {
+                        $(".badge-notify").addClass("badge-hidden");
+                        //$(".badge-notify").text("");
+                    }
+
                     $("li#noNotifications").hide();
                     $(data).each(function () {
                         debugger;
@@ -93,6 +117,7 @@ var app = function () {
                     });
                 } else {
                     debugger;
+                    $(".badge-notify").addClass("badge-hidden");
                     $("li#noNotifications").show();
                 }
                 //$($.parseJSON(data)).map(function () {
@@ -147,12 +172,19 @@ var app = function () {
                 debugger;
                 $("#subscribeBtn").hide();
                 $("#unsubscribeBtn").show();
+
+                sessionStorage.setItem("IsUserNotified", "false");
+                var notificationsCount = parseInt(sessionStorage.getItem("NotificationsCount")) + 1;
+                sessionStorage.setItem("NotificationsCount", notificationsCount);
+                getNotificationsDdlData();
+
                 var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
                 $("#eventMessageContainer").append(alertMessageElement);
             },
             done: new function () {
                 setTimeout(function () {
                     $($("#eventMessageContainer .alert")).fadeOut(200);
+                    
                 }, 3000);
             }
         });
@@ -167,6 +199,15 @@ var app = function () {
                 debugger;
                 $("#unsubscribeBtn").hide();
                 $("#subscribeBtn").show();
+
+                sessionStorage.setItem("IsUserNotified", "true");
+                var notificationsCount = 0;
+                if (parseInt(sessionStorage.getItem("NotificationsCount") > 0)) {
+                    notificationsCount = parseInt(sessionStorage.setItem("NotificationsCount")) - 1;
+                }
+                sessionStorage.setItem("NotificationsCount", notificationsCount);
+                getNotificationsDdlData();
+
                 var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
                 $("#eventMessageContainer").append(alertMessageElement);
 
@@ -174,6 +215,7 @@ var app = function () {
             done: new function () {
                 setTimeout(function () {
                     $($("#eventMessageContainer .alert")).fadeOut(200);
+                    
                 }, 3000);
             }
 

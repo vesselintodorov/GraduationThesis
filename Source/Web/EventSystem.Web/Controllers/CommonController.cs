@@ -32,9 +32,9 @@ namespace EventSystem.Web.Controllers
 
             var notificationsData = new List<NotificationsModel>();
 
-            var currentUserIds = this.eventsUsers.All().Where(x => x.UserID == currentUserId).Select(x => x.EventID).ToList(); ;
+            var currentUserIds = this.eventsUsers.All().Where(x => x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled).Select(x => x.EventID).ToList(); ;
 
-            var upcomingEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId && DbFunctions.DiffHours(DateTime.Now, x.EventId.StartDate) < 24 && DbFunctions.DiffMinutes(DateTime.Now, x.EventId.StartDate) > 0).ToList();
+            var upcomingEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled && DbFunctions.DiffHours(DateTime.Now, x.EventId.StartDate) < 24 && DbFunctions.DiffMinutes(DateTime.Now, x.EventId.StartDate) > 0).ToList();
 
             var upcomingLectures = this.lectures.All().Where(x => currentUserIds.Contains(x.EventId) && DbFunctions.DiffHours(DateTime.Now, x.Date) < 24 && DbFunctions.DiffMinutes(DateTime.Now, x.Date) > 0).Select(x => new CourseLectureViewModel
             {
