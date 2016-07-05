@@ -162,12 +162,22 @@ namespace EventSystem.Web.Controllers
                 Id = x.EventId,
                 Title = x.Title,
                 Type = x.Type,
-                ShortDescription = x.Description,
                 StartDate = x.StartDate,
-                EndDate = x.EndDate
+                EndDate = x.EndDate,
+                Description = x.Description
             }).ToList();
 
+            foreach (var item in model)
+            {
+                item.ShortDescription = this.GetShortDescription(item.Description);
+            }
+
             return PartialView(model);
+        }
+
+        private string GetShortDescription(string description)
+        {
+            return description.Length > 40 ? description.Substring(0, 40) + "..." : description;
         }
 
         [HttpGet]
@@ -443,18 +453,22 @@ namespace EventSystem.Web.Controllers
         public ActionResult UserEvents()
         {
             var currentUserId = User.Identity.GetUserId();
-            var currentUserEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled).ToList();
+            var currentUserEvents = this.eventsUsers.All().Where(x => x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled || x.Status == EventUserStatus.Passed).ToList();
 
             var model = currentUserEvents.Select(x => new EventViewModel
             {
                 Id = x.EventId.EventId,
                 Title = x.EventId.Title,
                 Type = x.EventId.Type,
-                ShortDescription = x.EventId.Description,
+                Description = x.EventId.Description,
                 StartDate = x.EventId.StartDate,
                 EndDate = x.EventId.EndDate
-            });
+            }).ToList();
 
+            foreach (var item in model)
+            {
+                item.ShortDescription = this.GetShortDescription(item.Description);
+            }
 
             return View(model);
         }
