@@ -42,7 +42,7 @@ namespace EventSystem.Web.Controllers
             return View(model);
         }
 
-        
+
 
         [HttpPost]
         [Authorize]
@@ -78,7 +78,7 @@ namespace EventSystem.Web.Controllers
             return View(model);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Display(int eventId, int? lectureId)
         {
             //var currentEvent = this.events.All().FirstOrDefault(x => x.EventId == eventId);
@@ -102,13 +102,18 @@ namespace EventSystem.Web.Controllers
                     Users = new List<UserViewModel>(),
                     IsManageLecturesAllowed = true,
                     IsManageUsersAllowed = true,
-                    IsCreator = currentEvent.Author == User.Identity.GetUserId(),
+                    IsCreator = this.CheckIfCreator(currentEvent.Author),
                     IsUserEnrolled = CheckIfCurrentUserIsEnrolledInEvent(eventId, User.Identity.GetUserId())
                 };
 
             model.ExternallySelectedLectureId = lectureId.HasValue ? lectureId.Value : 0;
 
             return View(model);
+        }
+
+        private bool CheckIfCreator(string eventAuthorId)
+        {
+            return eventAuthorId == User.Identity.GetUserId();
         }
 
         private bool CheckIfCurrentUserIsEnrolledInEvent(int eventId, string userId)
@@ -118,7 +123,7 @@ namespace EventSystem.Web.Controllers
         }
 
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Browse()
         {
             var browseFilterModel = new BrowseFilterInputModel();
@@ -131,7 +136,7 @@ namespace EventSystem.Web.Controllers
             return View(browseFilterModel);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult List(BrowseFilterInputModel browseFilterModel)
         {
             var events = this.events.All().Where(x => !x.IsFinished);
@@ -226,6 +231,7 @@ namespace EventSystem.Web.Controllers
             return PartialView(users);
         }
 
+        [Authorize]
         public ActionResult SubscribeUser(int eventId)
         {
             string alertType = string.Empty;
@@ -273,6 +279,7 @@ namespace EventSystem.Web.Controllers
             return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public ActionResult UnsubscribeUser(int eventId)
         {
             string alertType = string.Empty;
@@ -309,8 +316,6 @@ namespace EventSystem.Web.Controllers
 
         private List<CourseLectureViewModel> GetCourseLectures(Event currentEvent)
         {
-            var currentUserId = User.Identity.GetUserId();
-
             var courseLectures = new List<CourseLectureViewModel>();
             if (currentEvent.Type == EventType.Course)
             {
@@ -323,7 +328,7 @@ namespace EventSystem.Web.Controllers
                         LectureTeacher = x.Teacher,
                         LectureDescription = x.Description,
                         LectureDate = x.Date,
-                        IsCreator = currentEvent.Author == currentUserId
+                        IsCreator = this.CheckIfCreator(currentEvent.Author)
                     }).ToList();
             }
 
@@ -333,7 +338,6 @@ namespace EventSystem.Web.Controllers
         private List<CourseLectureViewModel> GetCourseLectures(int eventId)
         {
             var currentEvent = this.events.GetById(eventId);
-            var currentUserId = User.Identity.GetUserId();
 
             return this.lectures.All().Where(x => x.EventId == eventId)
                 .Select(x => new CourseLectureViewModel
@@ -344,7 +348,7 @@ namespace EventSystem.Web.Controllers
                     LectureTeacher = x.Teacher,
                     LectureDescription = x.Description,
                     LectureDate = x.Date,
-                    IsCreator = currentEvent.Author == currentUserId,
+                    IsCreator = this.CheckIfCreator(currentEvent.Author),
                 }).ToList();
 
         }
@@ -450,6 +454,7 @@ namespace EventSystem.Web.Controllers
             return PartialView();
         }
 
+        [Authorize]
         public ActionResult UserEvents()
         {
             var currentUserId = User.Identity.GetUserId();
