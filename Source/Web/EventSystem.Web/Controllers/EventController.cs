@@ -89,7 +89,7 @@ namespace EventSystem.Web.Controllers
                 return this.HttpNotFound(EventsResource.EventNotFound);
             }
 
-
+            var currentUserId = User.Identity.GetUserId();
             var model = new EventViewModel()
                 {
                     Id = eventId,
@@ -102,8 +102,8 @@ namespace EventSystem.Web.Controllers
                     Users = new List<UserViewModel>(),
                     IsManageLecturesAllowed = true,
                     IsManageUsersAllowed = true,
-                    IsCreator = this.CheckIfCreator(currentEvent.Author),
-                    IsUserEnrolled = CheckIfCurrentUserIsEnrolledInEvent(eventId, User.Identity.GetUserId())
+                    IsCreator = currentEvent.Author == currentUserId,
+                    IsUserEnrolled = CheckIfCurrentUserIsEnrolledInEvent(eventId, currentUserId)
                 };
 
             model.ExternallySelectedLectureId = lectureId.HasValue ? lectureId.Value : 0;
@@ -111,17 +111,7 @@ namespace EventSystem.Web.Controllers
             return View(model);
         }
 
-        private bool CheckIfCreator(string eventAuthorId)
-        {
-            return eventAuthorId == User.Identity.GetUserId();
-        }
-
-        private bool CheckIfCurrentUserIsEnrolledInEvent(int eventId, string userId)
-        {
-            var currentUserId = User.Identity.GetUserId();
-            return this.eventsUsers.All().Any(x => x.EventID == eventId && x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled);
-        }
-
+      
 
         //[Authorize]
         public ActionResult Browse()
@@ -317,6 +307,7 @@ namespace EventSystem.Web.Controllers
         private List<CourseLectureViewModel> GetCourseLectures(Event currentEvent)
         {
             var courseLectures = new List<CourseLectureViewModel>();
+            var currentUserId = User.Identity.GetUserId();
             if (currentEvent.Type == EventType.Course)
             {
                 courseLectures = this.lectures.All().Where(x => x.EventId == currentEvent.EventId)
@@ -328,17 +319,24 @@ namespace EventSystem.Web.Controllers
                         LectureTeacher = x.Teacher,
                         LectureDescription = x.Description,
                         LectureDate = x.Date,
-                        IsCreator = this.CheckIfCreator(currentEvent.Author)
+                        IsCreator = currentEvent.Author == currentUserId 
                     }).ToList();
             }
 
             return courseLectures;
         }
 
+        private bool CheckIfCurrentUserIsEnrolledInEvent(int eventId, string userId)
+        {
+            var currentUserId = User.Identity.GetUserId();
+            return this.eventsUsers.All().Any(x => x.EventID == eventId && x.UserID == currentUserId && x.Status == EventUserStatus.Enrolled);
+        }
+
+
         private List<CourseLectureViewModel> GetCourseLectures(int eventId)
         {
             var currentEvent = this.events.GetById(eventId);
-
+            var currentUserId = User.Identity.GetUserId();
             return this.lectures.All().Where(x => x.EventId == eventId)
                 .Select(x => new CourseLectureViewModel
                 {
@@ -348,7 +346,7 @@ namespace EventSystem.Web.Controllers
                     LectureTeacher = x.Teacher,
                     LectureDescription = x.Description,
                     LectureDate = x.Date,
-                    IsCreator = this.CheckIfCreator(currentEvent.Author),
+                    IsCreator = currentEvent.Author == currentUserId,
                 }).ToList();
 
         }
