@@ -12,6 +12,7 @@ using EventSystem.Web.Models;
 using System.Net;
 using EventSystem.Data.Common.Enums;
 using System.Resources;
+using PagedList;
 
 namespace EventSystem.Web.Controllers
 {
@@ -478,7 +479,7 @@ namespace EventSystem.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Comments(int eventId)
+        public ActionResult Comments(int eventId, int? page)
         {
             var comments = this.comments.All().Where(x => x.EventID == eventId).Select(x => new CommentViewModel
             {
@@ -488,7 +489,11 @@ namespace EventSystem.Web.Controllers
                 DateAdded = x.DateAdded
             }).OrderByDescending(x => x.DateAdded);
 
-            return PartialView(comments);
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            ViewBag.EventId = eventId;
+
+            return PartialView(comments.ToPagedList(pageNumber, pageSize));
         }
         [HttpGet]
         [Authorize]

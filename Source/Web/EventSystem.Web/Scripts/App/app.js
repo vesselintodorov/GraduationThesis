@@ -22,6 +22,9 @@ var app = function () {
             loadEventComments();
         }
 
+        if ($(".pagination-container")) {
+            $(".onPagingButtonClick .pagination a").click(onPagingButtonClick)
+        }
         //if ($("#addCommentBtn")) {
         //    $("#addCommentBtn").click(onAddCommentClick);
         //}
@@ -277,18 +280,24 @@ var app = function () {
 
     }
 
+    function onPagingButtonClick(e) {
+        e.preventDefault();
+        alert("yea");
+        //$(".onPagingButtonClick .pagination a")
+    }
+
     //function onAddCommentClick() {
     //    $.ajax({
     //        url: "/Event/AddComment",
     //        type: "POST",
     //        data: { eventId: $("#EventId").val(), title: $("#commentTitle").val(), content: $("#commentContent").val() },
     //        success: function (data) {
-               
+
     //        }
     //    });
     //}
 
-    
+
 
 
     return {
