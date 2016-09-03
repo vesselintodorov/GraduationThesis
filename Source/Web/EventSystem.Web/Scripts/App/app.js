@@ -17,6 +17,14 @@ var app = function () {
         $(document).on("click", ".btnExpellUser", onExpellUser);
         $("#SearchedEventName").focusout(onSearchEventBoxFocusOut);
         $(".notificationsBtn").click(onNotificationsBtnClick);
+
+        if ($("#commentsDiv")) {
+            loadEventComments();
+        }
+
+        //if ($("#addCommentBtn")) {
+        //    $("#addCommentBtn").click(onAddCommentClick);
+        //}
     });
 
     function onNotificationsBtnClick() {
@@ -104,7 +112,7 @@ var app = function () {
                         var currentItem = "<li><a href='/Event/Display/?eventId=" + this.Id + "&lectureId=" + this.LectureId
                             + "'><i " + (this.LectureId == 0 ? "class='fa fa-calendar'" : "class='fa fa-calendar-o'")
                             + ' aria-hidden="true"></i> ' + this.Title + "<div class='notificationSecondaryText text-danger'>след "
-                            + (this.HoursRemaining > 0 ? + this.HoursRemaining + (this.HoursRemaining == 1 ? " час" : " часа") + " и " : "") + this.MinutesRemaining
+                            + (this.HoursRemaining > 0 ? +this.HoursRemaining + (this.HoursRemaining == 1 ? " час" : " часа") + " и " : "") + this.MinutesRemaining
                             + " минути</div><div class='notificationSecondaryText'><strong>" + this.TypeMessage + "</strong></div></a></li>"
 
                         //<i class="fa fa-calendar-o" aria-hidden="true"></i>
@@ -184,7 +192,7 @@ var app = function () {
             done: new function () {
                 setTimeout(function () {
                     $($("#eventMessageContainer .alert")).fadeOut(200);
-                    
+
                 }, 3000);
             }
         });
@@ -215,7 +223,7 @@ var app = function () {
             done: new function () {
                 setTimeout(function () {
                     $($("#eventMessageContainer .alert")).fadeOut(200);
-                    
+
                 }, 3000);
             }
 
@@ -257,9 +265,34 @@ var app = function () {
         $("#browseForm").submit();
     }
 
+    function loadEventComments() {
+        $.ajax({
+            url: "/Event/Comments",
+            type: "POST",
+            data: { eventId: $("#EventId").val() },
+            success: function (data) {
+                $("#commentsDiv").html(data);
+            }
+        });
+
+    }
+
+    //function onAddCommentClick() {
+    //    $.ajax({
+    //        url: "/Event/AddComment",
+    //        type: "POST",
+    //        data: { eventId: $("#EventId").val(), title: $("#commentTitle").val(), content: $("#commentContent").val() },
+    //        success: function (data) {
+               
+    //        }
+    //    });
+    //}
+
+    
+
 
     return {
-
+        loadEventComments: loadEventComments
     }
 
 }();

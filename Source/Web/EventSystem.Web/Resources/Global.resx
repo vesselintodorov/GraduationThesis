@@ -220,7 +220,7 @@
     <value>Заглавие</value>
   </data>
   <data name="TUEvents" xml:space="preserve">
-    <value>ТУ Събития</value>
+    <value>Събития</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Тип</value>
@@ -254,5 +254,20 @@
   </data>
   <data name="From" xml:space="preserve">
     <value>от</value>
+  </data>
+  <data name="AddComment" xml:space="preserve">
+    <value>Добави коментар</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Коментари</value>
+  </data>
+  <data name="CommentAddFailed" xml:space="preserve">
+    <value>Възникна грешка при добавянето. Моля опитайте по-късно.</value>
+  </data>
+  <data name="CommentAddSuccess" xml:space="preserve">
+    <value>Вие успешно добавихте коментар!</value>
+  </data>
+  <data name="NoCommentsFound" xml:space="preserve">
+    <value>За това събитие все още няма коментари. Бъдете първия коментирал!</value>
   </data>
 </root>

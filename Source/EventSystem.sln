@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9E8EF138-CDFD-4C55-B372-F822C81D1EE4}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSystem.Web", "Web\EventSystem.Web\EventSystem.Web.csproj", "{0AF15E1E-6EBC-496C-9DFF-1BE3BF9234C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSystem.Data.Common", "Data\EventSystem.Data.Common\EventSystem.Data.Common.csproj", "{71EF7F90-88B6-440F-ACEA-5B9592C924F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSystem.Data.Services", "EventSystem.Data.Services\EventSystem.Data.Services.csproj", "{BA4557BD-D80D-481E-AB79-BAB86B821446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{71EF7F90-88B6-440F-ACEA-5B9592C924F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71EF7F90-88B6-440F-ACEA-5B9592C924F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71EF7F90-88B6-440F-ACEA-5B9592C924F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4557BD-D80D-481E-AB79-BAB86B821446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4557BD-D80D-481E-AB79-BAB86B821446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4557BD-D80D-481E-AB79-BAB86B821446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4557BD-D80D-481E-AB79-BAB86B821446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +60,6 @@ Global
 		{B7E6AD56-C8E5-46B7-A99E-94DE6B623C33} = {9E8EF138-CDFD-4C55-B372-F822C81D1EE4}
 		{0AF15E1E-6EBC-496C-9DFF-1BE3BF9234C9} = {F6F247F2-DEF4-4750-893D-E527288E42B8}
 		{71EF7F90-88B6-440F-ACEA-5B9592C924F3} = {9E8EF138-CDFD-4C55-B372-F822C81D1EE4}
+		{BA4557BD-D80D-481E-AB79-BAB86B821446} = {9E8EF138-CDFD-4C55-B372-F822C81D1EE4}
 	EndGlobalSection
 EndGlobal

@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добави коментар.
+        /// </summary>
+        public static string AddComment {
+            get {
+                return ResourceManager.GetString("AddComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Конфигурирайте и добавете събитие..
         /// </summary>
         public static string AddEventPageMsg {
@@ -93,6 +102,33 @@ namespace Resources {
         public static string Browse {
             get {
                 return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Възникна грешка при добавянето. Моля опитайте по-късно..
+        /// </summary>
+        public static string CommentAddFailed {
+            get {
+                return ResourceManager.GetString("CommentAddFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вие успешно добавихте коментар!.
+        /// </summary>
+        public static string CommentAddSuccess {
+            get {
+                return ResourceManager.GetString("CommentAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Коментари.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
             }
         }
         
@@ -255,6 +291,15 @@ namespace Resources {
         public static string MyEvents {
             get {
                 return ResourceManager.GetString("MyEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to За това събитие все още няма коментари. Бъдете първия коментирал!.
+        /// </summary>
+        public static string NoCommentsFound {
+            get {
+                return ResourceManager.GetString("NoCommentsFound", resourceCulture);
             }
         }
         
@@ -430,7 +475,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ТУ Събития.
+        ///   Looks up a localized string similar to Събития.
         /// </summary>
         public static string TUEvents {
             get {

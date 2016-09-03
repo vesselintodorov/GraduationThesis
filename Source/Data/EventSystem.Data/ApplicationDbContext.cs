@@ -30,6 +30,10 @@ namespace EventSystem.Data
 
         public IDbSet<Lecture> Lectures { get; set; }
 
+        public IDbSet<MessageTemplate> MessageTempaltes { get; set; }
+
+        public IDbSet<Comment> Comments { get; set; }
+
 
         public override int SaveChanges()
         {

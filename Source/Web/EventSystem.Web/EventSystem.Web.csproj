@@ -204,8 +204,10 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\NotificationsModel.cs" />
+    <Compile Include="Models\Event\AddCommentInputModel.cs" />
     <Compile Include="Models\Event\AddEventInputModel.cs" />
     <Compile Include="Models\Event\BrowseFilterInputModel.cs" />
+    <Compile Include="Models\Event\CommentViewModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Event\CourseLectureViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -239,6 +241,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\Images\Tu-sofia-logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -335,6 +338,8 @@
     <Content Include="Views\Event\DisplayLecture.cshtml" />
     <Content Include="Views\Event\AddEventDatePicker.cshtml" />
     <Content Include="Views\Event\UserEvents.cshtml" />
+    <Content Include="Views\Event\Comments.cshtml" />
+    <Content Include="Views\Event\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

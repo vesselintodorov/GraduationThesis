@@ -26,11 +26,12 @@
     {
         @Html.AntiForgeryToken()
         <hr />
-        @Html.ValidationSummary("", new { @class = "text-danger" })
+        @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
         <div class="form-group">
             @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -38,7 +39,7 @@
             @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Type, Model.TypesData, new { @class = "form-control" })
-
+                @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -51,6 +52,7 @@
             @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 

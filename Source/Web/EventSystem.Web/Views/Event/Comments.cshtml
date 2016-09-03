@@ -1,0 +1,23 @@
+﻿@model IEnumerable<EventSystem.Web.Models.Event.CommentViewModel>
+
+
+@if (Model.Count() > 0)
+{
+    foreach (var comment in Model)
+    {
+        
+        <div class="col-md-12 commentBlock">
+            <div class="col-md-12 commentTitleStyle">
+                <span>@comment.Title</span>
+                <span class="pull-right">@comment.DateAdded</span>
+            </div>
+            <div class="col-md-12 commentContentStyle">
+                <p>@comment.Content</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>@Resources.Global.NoCommentsFound</p>
+}

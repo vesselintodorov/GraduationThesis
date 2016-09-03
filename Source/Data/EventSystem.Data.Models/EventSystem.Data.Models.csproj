@@ -53,9 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="Comment.cs" />
     <Compile Include="CourseLecture.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="EventUser.cs" />
+    <Compile Include="Messages\MessageProvider.cs" />
+    <Compile Include="MessageTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

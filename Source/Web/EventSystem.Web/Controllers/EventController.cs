@@ -20,12 +20,14 @@ namespace EventSystem.Web.Controllers
         private IRepository<Event> events;
         private IRepository<Lecture> lectures;
         private IRepository<EventUser> eventsUsers;
+        private IRepository<Comment> comments;
 
-        public EventController(IRepository<Event> events, IRepository<Lecture> lectures, IRepository<EventUser> eventsUsers)
+        public EventController(IRepository<Event> events, IRepository<Lecture> lectures, IRepository<EventUser> eventsUsers, IRepository<Comment> comments)
         {
             this.events = events;
             this.lectures = lectures;
             this.eventsUsers = eventsUsers;
+            this.comments = comments;
         }
 
         [HttpGet]
@@ -111,7 +113,7 @@ namespace EventSystem.Web.Controllers
             return View(model);
         }
 
-      
+
 
         //[Authorize]
         public ActionResult Browse()
@@ -319,7 +321,7 @@ namespace EventSystem.Web.Controllers
                         LectureTeacher = x.Teacher,
                         LectureDescription = x.Description,
                         LectureDate = x.Date,
-                        IsCreator = currentEvent.Author == currentUserId 
+                        IsCreator = currentEvent.Author == currentUserId
                     }).ToList();
             }
 
@@ -474,6 +476,59 @@ namespace EventSystem.Web.Controllers
             }
 
             return View(model);
+        }
+
+        public ActionResult Comments(int eventId)
+        {
+            var comments = this.comments.All().Where(x => x.EventID == eventId).Select(x => new CommentViewModel
+            {
+                EventId = x.EventID,
+                Title = x.Title,
+                Content = x.Content,
+                DateAdded = x.DateAdded
+            }).OrderByDescending(x => x.DateAdded);
+
+            return PartialView(comments);
+        }
+        [HttpGet]
+        [Authorize]
+        public ActionResult AddComment(int eventId)
+        {
+            var model = new AddCommentInputModel { EventId = eventId };
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddComment(AddCommentInputModel model)
+        {
+            string alertType = "danger";
+            string alertMsg = Resources.Global.CommentAddFailed;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.comments.Add(new Comment
+                    {
+                        EventID = model.EventId,
+                        Title = model.Title,
+                        Content = model.Content,
+                        DateAdded = DateTime.Now
+                    });
+
+                    this.comments.SaveChanges();
+                    alertType = "success";
+                    alertMsg = Resources.Global.CommentAddSuccess;
+
+                }
+                catch (Exception ex)
+                {
+                   // Log the exception somewhere
+                }
+            }
+
+            return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
         }
     }
 }
