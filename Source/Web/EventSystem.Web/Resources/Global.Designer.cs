@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Адрес.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Участници.
         /// </summary>
         public static string Attendees {
@@ -102,6 +111,78 @@ namespace Resources {
         public static string Browse {
             get {
                 return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Промяна.
+        /// </summary>
+        public static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Възникна грешка при промяната. Моля опитайте по-късно..
+        /// </summary>
+        public static string ChangeAccountDetailsFailed {
+            get {
+                return ResourceManager.GetString("ChangeAccountDetailsFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вие успешно променихте детайлите по акаунта си!.
+        /// </summary>
+        public static string ChangeAccountDetailsSuccess {
+            get {
+                return ResourceManager.GetString("ChangeAccountDetailsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Смяна на информация.
+        /// </summary>
+        public static string ChangeAccountInfo {
+            get {
+                return ResourceManager.GetString("ChangeAccountInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Смяна на паролата.
+        /// </summary>
+        public static string ChangeAccountPassword {
+            get {
+                return ResourceManager.GetString("ChangeAccountPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Възникна грешка при промяна на паролата. Моля опитайте по-късно..
+        /// </summary>
+        public static string ChangePassswordFailed {
+            get {
+                return ResourceManager.GetString("ChangePassswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вие успешно променихте паролата си!.
+        /// </summary>
+        public static string ChangePasswordSuccess {
+            get {
+                return ResourceManager.GetString("ChangePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Град.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
             }
         }
         
@@ -138,6 +219,24 @@ namespace Resources {
         public static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Държава.
+        /// </summary>
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Текуща парола.
+        /// </summary>
+        public static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
             }
         }
         
@@ -286,11 +385,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Моят акаунт.
+        /// </summary>
+        public static string MyAccount {
+            get {
+                return ResourceManager.GetString("MyAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Моите събития.
         /// </summary>
         public static string MyEvents {
             get {
                 return ResourceManager.GetString("MyEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нова парола.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
             }
         }
         
@@ -340,6 +457,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Телефонен номер.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Профил.
         /// </summary>
         public static string Profile {
@@ -385,6 +511,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Моля въведете адрес..
+        /// </summary>
+        public static string RequiredAddress {
+            get {
+                return ResourceManager.GetString("RequiredAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете град..
+        /// </summary>
+        public static string RequiredCity {
+            get {
+                return ResourceManager.GetString("RequiredCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля потвърдете паролата..
+        /// </summary>
+        public static string RequiredConfirmPassword {
+            get {
+                return ResourceManager.GetString("RequiredConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете държава..
+        /// </summary>
+        public static string RequiredCountry {
+            get {
+                return ResourceManager.GetString("RequiredCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете текуща парола..
+        /// </summary>
+        public static string RequiredCurrentPassword {
+            get {
+                return ResourceManager.GetString("RequiredCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Моля въведете валиден мейл адрес..
         /// </summary>
         public static string RequiredEmail {
@@ -421,11 +592,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Моля въведете нова парола с минимум 6 символа..
+        /// </summary>
+        public static string RequiredNewPassword {
+            get {
+                return ResourceManager.GetString("RequiredNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Моля въведете парола с минимум 6 символа..
         /// </summary>
         public static string RequiredPassword {
             get {
                 return ResourceManager.GetString("RequiredPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля въведете телефонен номер..
+        /// </summary>
+        public static string RequiredPhoneNumber {
+            get {
+                return ResourceManager.GetString("RequiredPhoneNumber", resourceCulture);
             }
         }
         

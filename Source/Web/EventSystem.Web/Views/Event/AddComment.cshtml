@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-12">
             @Html.LabelFor(m => m.Content, new { @class = "col-md-3" })
-            @Html.TextAreaFor(m => m.Content, new { @class = "col-md-6 form-control commentContent"})
+            @Html.TextAreaFor(m => m.Content, new { @class = "col-md-6 form-control commentContent" })
             @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger pull-right" })
         </div>
         <div class="text-center">
@@ -38,7 +38,9 @@
         debugger;
         var alertMessageElement = "<div class='alert alert-" + data.responseJSON.alertType + "'><strong>" + data.responseJSON.alertMsg + "</strong></div>";
         $("#commentMessageContainer").append(alertMessageElement);
-        app.loadEventComments();
+        if ($("#commentsDiv")) {
+            app.loadEventComments();
+        }
         setTimeout(function () {
             $($("#commentMessageContainer .alert")).fadeOut(200);
 

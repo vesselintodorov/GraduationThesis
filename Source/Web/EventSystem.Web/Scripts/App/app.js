@@ -23,8 +23,10 @@ var app = function () {
         }
 
         if ($(".pagination-container")) {
+            $(".pagination-container").addClass("col-md-12");
             $(".onPagingButtonClick .pagination a").click(onPagingButtonClick)
         }
+
         //if ($("#addCommentBtn")) {
         //    $("#addCommentBtn").click(onAddCommentClick);
         //}
@@ -157,6 +159,13 @@ var app = function () {
                 window.location.href = url;
             });
         }
+
+        if (pageGrids.userEventsGrid) {
+            pageGrids.userEventsGrid.onRowSelect(function (e) {
+                var url = '/Event/Display/?eventId=' + e.row.Id;
+                window.location.href = url;
+            });
+        }
     }
 
     function manageCollapsableDivs() {
@@ -269,14 +278,18 @@ var app = function () {
     }
 
     function loadEventComments() {
-        $.ajax({
-            url: "/Event/Comments",
-            type: "POST",
-            data: { eventId: $("#EventId").val() },
-            success: function (data) {
-                $("#commentsDiv").html(data);
-            }
-        });
+
+        var currentEventId = $("#EventId").val();
+        if (currentEventId) {
+            $.ajax({
+                url: "/Event/Comments",
+                type: "POST",
+                data: { eventId: currentEventId },
+                success: function (data) {
+                    $("#commentsDiv").html(data);
+                }
+            });
+        }
 
     }
 
@@ -297,11 +310,14 @@ var app = function () {
     //    });
     //}
 
-
+    function clearTextFieldsInForm(formId) {
+        $('#' + formId).find("input[type='text'], input[type='password'], textarea").val("");
+    }
 
 
     return {
-        loadEventComments: loadEventComments
+        loadEventComments: loadEventComments,
+        clearTextFieldsInForm: clearTextFieldsInForm
     }
 
 }();

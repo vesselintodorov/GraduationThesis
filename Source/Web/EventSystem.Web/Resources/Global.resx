@@ -270,4 +270,67 @@
   <data name="NoCommentsFound" xml:space="preserve">
     <value>За това събитие все още няма коментари. Бъдете първия коментирал!</value>
   </data>
+  <data name="Change" xml:space="preserve">
+    <value>Промяна</value>
+  </data>
+  <data name="ChangeAccountDetailsFailed" xml:space="preserve">
+    <value>Възникна грешка при промяната. Моля опитайте по-късно.</value>
+  </data>
+  <data name="ChangeAccountDetailsSuccess" xml:space="preserve">
+    <value>Вие успешно променихте детайлите по акаунта си!</value>
+  </data>
+  <data name="ChangePassswordFailed" xml:space="preserve">
+    <value>Възникна грешка при промяна на паролата. Моля опитайте по-късно.</value>
+  </data>
+  <data name="ChangePasswordSuccess" xml:space="preserve">
+    <value>Вие успешно променихте паролата си!</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="ChangeAccountInfo" xml:space="preserve">
+    <value>Смяна на информация</value>
+  </data>
+  <data name="ChangeAccountPassword" xml:space="preserve">
+    <value>Смяна на паролата</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Град</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Държава</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Текуща парола</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Моят акаунт</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Нова парола</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Телефонен номер</value>
+  </data>
+  <data name="RequiredAddress" xml:space="preserve">
+    <value>Моля въведете адрес.</value>
+  </data>
+  <data name="RequiredCity" xml:space="preserve">
+    <value>Моля въведете град.</value>
+  </data>
+  <data name="RequiredConfirmPassword" xml:space="preserve">
+    <value>Моля потвърдете паролата.</value>
+  </data>
+  <data name="RequiredCountry" xml:space="preserve">
+    <value>Моля въведете държава.</value>
+  </data>
+  <data name="RequiredCurrentPassword" xml:space="preserve">
+    <value>Моля въведете текуща парола.</value>
+  </data>
+  <data name="RequiredNewPassword" xml:space="preserve">
+    <value>Моля въведете нова парола с минимум 6 символа.</value>
+  </data>
+  <data name="RequiredPhoneNumber" xml:space="preserve">
+    <value>Моля въведете телефонен номер.</value>
+  </data>
 </root>

@@ -1,0 +1,67 @@
+﻿@model EventSystem.Web.Models.Manage.AccountDetailsViewModel
+@{
+    ViewBag.Title = Resources.Global.ChangeAccountInfo;
+}
+<h4>@ViewBag.Title</h4>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("AccountDetails", "Manage", new AjaxOptions { HttpMethod = "POST", OnComplete = "onChangeAccountDetailsClickSuccess" }, new { id = "changeAccountDetailsForm", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @*<h4>Change Account Details</h4>*@
+    <hr />
+    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Resources.Global.Change" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<div id="changeAccountDetailsMessageContainer"></div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    function onChangeAccountDetailsClickSuccess(data) {
+        debugger;
+        var alertMessageElement = "<div class='alert alert-" + data.responseJSON.alertType + "'><strong>" + data.responseJSON.alertMsg + "</strong></div>";
+        $("#changeAccountDetailsMessageContainer").append(alertMessageElement);
+        //app.clearTextFieldsInForm("changeAccountDetailsForm");
+        setTimeout(function () {
+            $($("#changeAccountDetailsMessageContainer .alert")).fadeOut(200);
+
+        }, 3000);
+    }
+</script>

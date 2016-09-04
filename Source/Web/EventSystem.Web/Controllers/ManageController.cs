@@ -7,6 +7,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EventSystem.Web.Models;
+using EventSystem.Web.Models.Manage;
+using EventSystem.Data.Models;
+using EventSystem.Data.Common.Repository;
+using Microsoft.AspNet.Identity.EntityFramework;
+using EventSystem.Data;
 
 namespace EventSystem.Web.Controllers
 {
@@ -15,15 +20,18 @@ namespace EventSystem.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IRepository<ApplicationUser> users;
 
-        public ManageController()
+        public ManageController(IRepository<ApplicationUser> users)
         {
+             this.users = users;
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IRepository<ApplicationUser> users)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+             this.users = users;
         }
 
         public ApplicationSignInManager SignInManager
@@ -32,9 +40,9 @@ namespace EventSystem.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -215,7 +223,7 @@ namespace EventSystem.Web.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-            return View();
+            return PartialView();
         }
 
         //
@@ -224,22 +232,29 @@ namespace EventSystem.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            string alertType = "danger";
+            string alertMsg = Resources.Global.ChangePassswordFailed;
+
+            if (ModelState.IsValid)
             {
-                return View(model);
-            }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    if (user != null)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
+
+                    alertType = "success";
+                    alertMsg = Resources.Global.ChangePasswordSuccess;
+                    //return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
-            AddErrors(result);
-            return View(model);
+
+            //AddErrors(result);
+            //return PartialView(model);
+            return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -320,6 +335,51 @@ namespace EventSystem.Web.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        public ActionResult AccountDetails()
+        {
+            return PartialView();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AccountDetails(AccountDetailsViewModel model)
+        {
+            string alertType = "danger";
+            string alertMsg = Resources.Global.ChangeAccountDetailsFailed;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var currentUserId = User.Identity.GetUserId();
+                    var currentUser = this.users.All().FirstOrDefault(x => x.Id == currentUserId);
+                    this.users.Update(currentUser);
+
+
+                    currentUser.PhoneNumber = model.PhoneNumber;
+                    currentUser.Country = model.Country;
+                    currentUser.City = model.City;
+                    currentUser.Address = model.Address;
+
+                    this.users.SaveChanges();
+
+                    alertType = "success";
+                    alertMsg = Resources.Global.ChangeAccountDetailsSuccess;
+                   
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception somewhere
+                }
+
+            }
+            
+            return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
+        }
+
+       
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -331,7 +391,7 @@ namespace EventSystem.Web.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -382,6 +442,6 @@ namespace EventSystem.Web.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
