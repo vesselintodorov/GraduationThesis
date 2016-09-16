@@ -296,19 +296,7 @@ var app = function () {
     function onPagingButtonClick(e) {
         e.preventDefault();
         alert("yea");
-        //$(".onPagingButtonClick .pagination a")
     }
-
-    //function onAddCommentClick() {
-    //    $.ajax({
-    //        url: "/Event/AddComment",
-    //        type: "POST",
-    //        data: { eventId: $("#EventId").val(), title: $("#commentTitle").val(), content: $("#commentContent").val() },
-    //        success: function (data) {
-
-    //        }
-    //    });
-    //}
 
     function clearTextFieldsInForm(formId) {
         $('#' + formId).find("input[type='text'], input[type='password'], textarea").val("");

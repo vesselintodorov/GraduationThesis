@@ -31,6 +31,38 @@ namespace EventSystem.Web.Controllers
             this.comments = comments;
         }
 
+        public ActionResult Display(int eventId, int? lectureId)
+        {
+            var currentEvent = this.events.GetById(eventId);
+
+            if (currentEvent == null)
+            {
+                return this.HttpNotFound(EventsResource.EventNotFound);
+            }
+
+            var currentUserId = User.Identity.GetUserId();
+            var model = new EventViewModel()
+            {
+                Id = eventId,
+                Title = currentEvent.Title,
+                Type = currentEvent.Type,
+                Description = currentEvent.Description,
+                StartDate = currentEvent.StartDate,
+                EndDate = currentEvent.EndDate,
+                Lectures = GetCourseLectures(currentEvent),
+                Users = new List<UserViewModel>(),
+                IsManageLecturesAllowed = true,
+                IsManageUsersAllowed = true,
+                IsCreator = currentEvent.Author == currentUserId,
+                IsUserEnrolled = CheckIfCurrentUserIsEnrolledInEvent(eventId, currentUserId)
+            };
+
+            model.ExternallySelectedLectureId = lectureId.HasValue ? lectureId.Value : 0;
+
+            return View(model);
+        }
+
+
         [HttpGet]
         [Authorize]
         public ActionResult Add()
@@ -82,37 +114,7 @@ namespace EventSystem.Web.Controllers
         }
 
         //[Authorize]
-        public ActionResult Display(int eventId, int? lectureId)
-        {
-            //var currentEvent = this.events.All().FirstOrDefault(x => x.EventId == eventId);
-            var currentEvent = this.events.GetById(eventId);
-
-            if (currentEvent == null)
-            {
-                return this.HttpNotFound(EventsResource.EventNotFound);
-            }
-
-            var currentUserId = User.Identity.GetUserId();
-            var model = new EventViewModel()
-                {
-                    Id = eventId,
-                    Title = currentEvent.Title,
-                    Type = currentEvent.Type,
-                    Description = currentEvent.Description,
-                    StartDate = currentEvent.StartDate,
-                    EndDate = currentEvent.EndDate,
-                    Lectures = GetCourseLectures(currentEvent),
-                    Users = new List<UserViewModel>(),
-                    IsManageLecturesAllowed = true,
-                    IsManageUsersAllowed = true,
-                    IsCreator = currentEvent.Author == currentUserId,
-                    IsUserEnrolled = CheckIfCurrentUserIsEnrolledInEvent(eventId, currentUserId)
-                };
-
-            model.ExternallySelectedLectureId = lectureId.HasValue ? lectureId.Value : 0;
-
-            return View(model);
-        }
+        
 
 
 

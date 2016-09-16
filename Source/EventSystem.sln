@@ -5,10 +5,6 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9E8EF138-CDFD-4C55-B372-F822C81D1EE4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{70AE51B4-E858-46A9-A980-7995DC7C9C05}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSystem.Common", "EventSystem.Common\EventSystem.Common.csproj", "{2A59A568-D681-461E-85F8-4F48B16C164B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSystem.Data", "Data\EventSystem.Data\EventSystem.Data.csproj", "{41B48A85-E88F-4BBA-B6CD-F7B775D3CA34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSystem.Data.Models", "Data\EventSystem.Data.Models\EventSystem.Data.Models.csproj", "{B7E6AD56-C8E5-46B7-A99E-94DE6B623C33}"
@@ -27,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2A59A568-D681-461E-85F8-4F48B16C164B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A59A568-D681-461E-85F8-4F48B16C164B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A59A568-D681-461E-85F8-4F48B16C164B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A59A568-D681-461E-85F8-4F48B16C164B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41B48A85-E88F-4BBA-B6CD-F7B775D3CA34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{41B48A85-E88F-4BBA-B6CD-F7B775D3CA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41B48A85-E88F-4BBA-B6CD-F7B775D3CA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
