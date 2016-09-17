@@ -1,18 +1,4 @@
-﻿
-
-<script>
-    //$(document).ready(function () {
-    //    //$('.datepicker').datepicker({
-    //    //    orientation: "bottom auto"
-    //    //}); //Initialise any date pickers
-
-    //    $('.datepicker').datetimepicker({ format: 'dd-mm-yyyy hh:ii', language: 'bg' });
-    //});
-
-
-</script>
-
-@model EventSystem.Web.Models.Event.AddEventInputModel
+﻿@model EventSystem.Web.Models.Event.AddEventInputModel
 @using Resources;
 @{
     ViewBag.Title = Global.AddEventPageMsg;
@@ -26,7 +12,6 @@
     {
         @Html.AntiForgeryToken()
         <hr />
-        @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
         <div class="form-group">
             @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">

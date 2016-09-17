@@ -33,6 +33,10 @@ namespace EventSystem.Web
                       "~/Content/bootstrap-datetimepicker.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));
+
+            BundleTable.EnableOptimizations = true;
+
         }
+        
     }
 }
