@@ -67,8 +67,6 @@ namespace EventSystem.Web.App_Start
         {
             kernel.Bind<DbContext>().To<ApplicationDbContext>();
 
-            kernel.Bind(typeof(IRepository<Event>)).To(typeof(DeletableEntityRepository<Event>));
-
             kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
 
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));

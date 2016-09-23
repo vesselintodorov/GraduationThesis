@@ -213,6 +213,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\NotificationsModel.cs" />
     <Compile Include="Models\Event\AddCommentInputModel.cs" />
+    <Compile Include="Models\Event\AddEventDatePickerViewModel.cs" />
     <Compile Include="Models\Event\AddEventInputModel.cs" />
     <Compile Include="Models\Event\BrowseFilterInputModel.cs" />
     <Compile Include="Models\Event\CommentViewModel.cs" />
@@ -358,6 +359,7 @@
     <Content Include="Views\Event\Comments.cshtml" />
     <Content Include="Views\Event\AddComment.cshtml" />
     <Content Include="Views\Manage\AccountDetails.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

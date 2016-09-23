@@ -16,7 +16,6 @@ namespace EventSystem.Web.Models.Event
         [ResourcesDisplayName("Title", NameResourceType = typeof(Global))]
         public string Title { get; set; }
 
-
         [ResourcesDisplayName("Type", NameResourceType = typeof(Global))]
         public EventType Type { get; set; }
 
@@ -25,7 +24,6 @@ namespace EventSystem.Web.Models.Event
 
         [ResourcesDisplayName("StartDate", NameResourceType = typeof(Global))]
         public DateTime StartDate { get; set; }
-
 
         [ResourcesDisplayName("EndDate", NameResourceType = typeof(Global))]
         public DateTime? EndDate { get; set; }
@@ -48,6 +46,5 @@ namespace EventSystem.Web.Models.Event
         public List<UserViewModel> Users { get; set; }
 
         public int ExternallySelectedLectureId { get; set; }
-
     }
 }

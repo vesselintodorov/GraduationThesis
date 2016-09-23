@@ -34,7 +34,7 @@ namespace EventSystem.Web
                       "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
 
         }
         

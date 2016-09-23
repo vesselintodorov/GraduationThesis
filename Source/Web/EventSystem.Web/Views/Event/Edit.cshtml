@@ -1,0 +1,88 @@
+﻿@model EventSystem.Web.Models.Event.AddEventInputModel
+@{
+    var eventType = Model != null ? (int)Model.Type : 1; // if its first load set first item of the event types enum as event type
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<div id="editEventModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="editEventModalLabel">@*@Model.LectureTitle*@</h4>
+            </div>
+            @using (Ajax.BeginForm("EditEvent", "Event", new AjaxOptions { HttpMethod = "POST", OnComplete = "onEditCompleted" }, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="modal-body">
+
+                    <div class="container-fluid bd-example-row">
+
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+                        <hr />
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Type, Model.TypesData, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div id="eventTypeContainer">
+                            @Html.Action("AddEventDatePicker", "Event", new { eventId = 0, eventTypeId = eventType })
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" class="btn btn-default" value="@Resources.Global.Edit" />
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>*@
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-default" value="@Resources.Global.Edit" />
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@*<div class="bd-example bd-example-padded-bottom">
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#gridSystemModal">
+            Launch demo modal
+        </button>
+    </div>*@
+
+<script>
+    function onEditCompleted(data) {
+        debugger;
+        var alertMessageElement = "<div class='alert alert-" + data.responseJSON.alertType + "'><strong>" + data.responseJSON.alertMsg + "</strong></div>";
+        $(".modal-body").append(alertMessageElement);
+        
+        setTimeout(function () {
+            $($("#commentMessageContainer .alert")).fadeOut(200);
+            $('#editEventModal').modal('hide');
+        }, 3000);
+    }
+</script>

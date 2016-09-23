@@ -1,6 +1,7 @@
 ﻿@model EventSystem.Web.Models.Event.AddEventInputModel
 @using Resources;
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = Global.AddEventPageMsg;
     var eventType = Model != null ? (int)Model.Type : 1; // if its first load set first item of the event types enum as event type
 }
@@ -29,7 +30,7 @@
         </div>
 
         <div id="eventTypeContainer">
-            @Html.Action("AddEventDatePicker", "Event", new { eventTypeId = eventType })
+            @Html.Action("AddEventDatePicker", "Event", new { eventId = 0, eventTypeId = eventType})
         </div>
 
 

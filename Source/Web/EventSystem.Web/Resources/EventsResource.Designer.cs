@@ -115,6 +115,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Възникна грешка при променянето на събитието! Моля опитайте по-късно..
+        /// </summary>
+        public static string EventEditFailure {
+            get {
+                return ResourceManager.GetString("EventEditFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Събитието е променено успешно!.
+        /// </summary>
+        public static string EventEditSuccess {
+            get {
+                return ResourceManager.GetString("EventEditSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вие успешно се записахте за това събитие!.
         /// </summary>
         public static string EventEnrolled {

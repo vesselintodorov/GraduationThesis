@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EventSystem.Web.Models.Event.EventViewModel>
+﻿
+@model IEnumerable<EventSystem.Web.Models.Event.EventViewModel>
 @using GridMvc.Html
 
 @Html.Grid(Model).Named("browseEventsGrid").Columns(columns =>
@@ -12,10 +13,4 @@
            }).WithPaging(20)
 
 
-@*<script>
-    $(function () {
-        pageGrids.browseEventsGrid.onRowSelect(function (e) {
-            alert(e.row.OrderID);
-        });
-    });
-</script>*@
+

@@ -12,6 +12,8 @@ namespace EventSystem.Web.Models.Event
 {
     public class AddEventInputModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessageResourceType = typeof(EventsResource), ErrorMessageResourceName = "RequiredTitle")]
         [ResourcesDisplayName("Title", NameResourceType = typeof(Global))]
         public string Title { get; set; }
@@ -32,13 +34,6 @@ namespace EventSystem.Web.Models.Event
         public DateTime StartDate { get; set; }
 
         public List<SelectListItem> TypesData { get; set; } 
-
-
-        //[Required(ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "RequiredEndDate")]
-        //[DisplayFormat(DataFormatString = "{0:dd/mm/yyyy hh:ii}")]
-        //[DataType(DataType.Date)]
-        //[ResourcesDisplayName("EndDate", NameResourceType = typeof(Global))]
-        //public DateTime? EndDate { get; set; }
 
         public string DateRange { get; set; }
 

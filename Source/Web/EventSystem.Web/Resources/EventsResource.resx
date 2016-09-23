@@ -210,4 +210,10 @@
   <data name="ExpellUserSuccess" xml:space="preserve">
     <value>Успешно изключване на човек!</value>
   </data>
+  <data name="EventEditFailure" xml:space="preserve">
+    <value>Възникна грешка при променянето на събитието! Моля опитайте по-късно.</value>
+  </data>
+  <data name="EventEditSuccess" xml:space="preserve">
+    <value>Събитието е променено успешно!</value>
+  </data>
 </root>

@@ -109,11 +109,16 @@
     <div class="text-center">
         @if (!Model.IsCreator)
         {
-            <input id="subscribeBtn" type="button" class="btn btn-lg btn-primary btn-success" value="@Global.Subscribe" style="@(Model.IsUserEnrolled ? "display: none;" : "")" />
-            <input id="unsubscribeBtn" type="button" class="btn btn-lg btn-primary btn-danger" value="@Global.Unsubscribe" style="@(Model.IsUserEnrolled ? "" : "display: none;")" />
+            <input id="subscribeBtn" type="button" class="btn btn-lg btn-primary btn-success"
+                   value="@Global.Subscribe" style="@(Model.IsUserEnrolled ? "display: none;" : "")" />
+            <input id="unsubscribeBtn" type="button" class="btn btn-lg btn-primary btn-danger"
+                   value="@Global.Unsubscribe" style="@(Model.IsUserEnrolled ? "" : "display: none;")" />
+        }
+        else
+        {
+            <input id="editBtn" type="button" class="btn btn-lg btn-primary btn-danger" value="@Global.Edit" />
         }
         <div id="eventMessageContainer"></div>
-
     </div>
 
     <hr />
@@ -138,6 +143,8 @@
     </div>
 
 
+    <div id="editEventModalContainer">
 
+    </div>
 
 </div>

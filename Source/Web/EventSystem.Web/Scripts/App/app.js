@@ -3,24 +3,27 @@
 var app = function () {
 
     $(document).ready(function () {
+        if ($("#commentsDiv")) {
+            loadEventComments();
+        }
+
 
         fixJqueryValidationForChrome();
         manageCollapsableDivs();
-        getNotificationsDdlData();
+        refreshNotificationsDdlData();
         $("#addEventContainer #Type").change(onAddEventTypeChange);
         $('.datepicker').datetimepicker({ format: 'dd/mm/yyyy hh:ii', language: 'bg' });
         $(".browseFilter").change(onBrowseFilterControlChange);
         manageGridEvents();
         $("#subscribeBtn").click(onEventSubscribe);
         $("#unsubscribeBtn").click(onEventUnsubscribe);
+        $("#editBtn").click(onEventEdit);
         bindExternalLectureOpen();
         $(document).on("click", ".btnExpellUser", onExpellUser);
         $("#SearchedEventName").focusout(onSearchEventBoxFocusOut);
         $(".notificationsBtn").click(onNotificationsBtnClick);
 
-        if ($("#commentsDiv")) {
-            loadEventComments();
-        }
+        
 
         if ($(".pagination-container")) {
             $(".pagination-container").addClass("col-md-12");
@@ -84,7 +87,7 @@ var app = function () {
         }
     }
 
-    function getNotificationsDdlData() {
+    function refreshNotificationsDdlData() {
         debugger;
         $.ajax({
             url: "/Common/GetNotificationsData",
@@ -142,10 +145,12 @@ var app = function () {
 
     function onAddEventTypeChange() {
         debugger;
+        var eventId = $("#EventId").val() === undefined ? 0 : $("#EventId").val();
+        var eventTypeId = $("#Type").val();
         $.ajax({
             url: "/Event/AddEventDatePicker",
             type: "POST",
-            data: { eventTypeId: $(this).val() },
+            data: { eventId: eventId, eventTypeId: $(this).val(), eventTypeId: $("#Type").val() },
             success: function (data) {
                 $("#eventTypeContainer").html(data);
             }
@@ -183,28 +188,25 @@ var app = function () {
 
 
     function onEventSubscribe() {
-        debugger;
         $.ajax({
             url: "/Event/SubscribeUser",
             type: "POST",
             data: { eventId: $("#EventId").val() },
             success: function (data) {
-                debugger;
                 $("#subscribeBtn").hide();
                 $("#unsubscribeBtn").show();
 
                 sessionStorage.setItem("IsUserNotified", "false");
                 var notificationsCount = parseInt(sessionStorage.getItem("NotificationsCount")) + 1;
                 sessionStorage.setItem("NotificationsCount", notificationsCount);
-                getNotificationsDdlData();
-
-                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
+                refreshNotificationsDdlData();
+                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>"
+                    + data.alertMsg + "</strong></div>";
                 $("#eventMessageContainer").append(alertMessageElement);
             },
             done: new function () {
                 setTimeout(function () {
                     $($("#eventMessageContainer .alert")).fadeOut(200);
-
                 }, 3000);
             }
         });
@@ -216,7 +218,6 @@ var app = function () {
             type: "POST",
             data: { eventId: $("#EventId").val() },
             success: function (data) {
-                debugger;
                 $("#unsubscribeBtn").hide();
                 $("#subscribeBtn").show();
 
@@ -226,19 +227,16 @@ var app = function () {
                     notificationsCount = parseInt(sessionStorage.setItem("NotificationsCount")) - 1;
                 }
                 sessionStorage.setItem("NotificationsCount", notificationsCount);
-                getNotificationsDdlData();
-
-                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>" + data.alertMsg + "</strong></div>";
+                refreshNotificationsDdlData();
+                var alertMessageElement = "<div class='alert alert-" + data.alertType + "'><strong>"
+                    + data.alertMsg + "</strong></div>";
                 $("#eventMessageContainer").append(alertMessageElement);
-
             },
             done: new function () {
                 setTimeout(function () {
                     $($("#eventMessageContainer .alert")).fadeOut(200);
-
                 }, 3000);
             }
-
         });
     }
 
@@ -278,19 +276,15 @@ var app = function () {
     }
 
     function loadEventComments() {
-
         var currentEventId = $("#EventId").val();
         if (currentEventId) {
             $.ajax({
                 url: "/Event/Comments",
                 type: "POST",
                 data: { eventId: currentEventId },
-                success: function (data) {
-                    $("#commentsDiv").html(data);
-                }
+                success: function (data) { $("#commentsDiv").html(data); }
             });
         }
-
     }
 
     function onPagingButtonClick(e) {
@@ -300,6 +294,35 @@ var app = function () {
 
     function clearTextFieldsInForm(formId) {
         $('#' + formId).find("input[type='text'], input[type='password'], textarea").val("");
+    }
+
+    function onEventEdit() {
+        debugger;
+        $.ajax({
+            url: "/Event/Edit",
+            type: "GET",
+            data: { eventId: $("#EventId").val() },
+            success: function (data) {
+                debugger;
+                $("#editEventModalContainer").html(data);
+                $('#editEventModal').modal('show');
+            }
+        });
+
+        //$.ajax({
+        //    url: "/Event/Edit",
+        //    type: "POST",
+        //    data: { eventId: $("#EventId").val() },
+        //    success: function (data) {
+
+        //        //$("#usersGridContainer").html(data);
+        //        //var alertMessageElement = "<div class='alert alert-" + alertType + "'><strong>" + alertMsg + "</strong></div>";
+        //        //$("#usersGridContainer").append(alertMessageElement);
+        //        //setTimeout(function () {
+        //        //    $("#usersGridContainer .alert").fadeOut(200);
+        //        //}, 3000);
+        //    }
+        //});
     }
 
 

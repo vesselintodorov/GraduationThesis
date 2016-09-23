@@ -333,4 +333,7 @@
   <data name="RequiredPhoneNumber" xml:space="preserve">
     <value>Моля въведете телефонен номер.</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Промяна</value>
+  </data>
 </root>

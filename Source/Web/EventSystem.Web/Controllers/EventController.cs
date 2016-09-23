@@ -73,7 +73,6 @@ namespace EventSystem.Web.Controllers
                 Text = base.GetLocalizedEventTypeString(x),
                 Value = ((int)x).ToString()
             }).ToList();
-
             return View(model);
         }
 
@@ -81,6 +80,7 @@ namespace EventSystem.Web.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(AddEventInputModel model)
         {
             if (ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace EventSystem.Web.Controllers
         }
 
         //[Authorize]
-        
+
 
 
 
@@ -451,11 +451,29 @@ namespace EventSystem.Web.Controllers
             return PartialView(model);
         }
 
-        public ActionResult AddEventDatePicker(int eventTypeId)
+        public ActionResult AddEventDatePicker(int eventId, int eventTypeId)
         {
-            ViewBag.EventTypeId = eventTypeId;
-            return PartialView();
+            //ViewBag.EventTypeId = eventTypeId;
+            //ViewBag.DateRange = DateTime.Now.ToString("dd/MM/yyyy") + " - " + DateTime.Now.AddMonths(1).ToString("dd/MM/yyyy");
+            //ViewBag.StartDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+            Event currentEvent = new Event();
+
+            if (eventId > 0)
+            {
+                currentEvent = this.events.GetById(eventId);
+            }
+            var model = new AddEventDatePickerViewModel();
+            model.EventType = (EventType)eventTypeId;
+            model.DateRange = eventId > 0 && (EventType)eventTypeId == EventType.Course
+                ? GetDateRange(currentEvent.StartDate, currentEvent.EndDate.Value)
+                : DateTime.Now.ToString("dd/MM/yyyy") + " - " + DateTime.Now.AddMonths(1).ToString("dd/MM/yyyy");
+            model.StartDate = eventId > 0
+                ? currentEvent.StartDate.ToString("dd/MM/yyyy HH:mm")
+                : DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+
+            return PartialView(model);
         }
+
 
         [Authorize]
         public ActionResult UserEvents()
@@ -531,11 +549,81 @@ namespace EventSystem.Web.Controllers
                 }
                 catch (Exception ex)
                 {
-                   // Log the exception somewhere
+                    // Log the exception somewhere
                 }
             }
 
             return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int eventId)
+        {
+            var currentEvent = events.GetById(eventId);
+
+            var model = new AddEventInputModel
+            {
+                Id = currentEvent.EventId,
+                Title = currentEvent.Title,
+                Type = currentEvent.Type,
+                Description = currentEvent.Description,
+                TypesData = Enum.GetValues(typeof(EventType)).Cast<EventType>().Select(x => new SelectListItem
+                {
+                    Text = base.GetLocalizedEventTypeString(x),
+                    Value = ((int)x).ToString()
+                }).ToList(),
+
+                DateRange = currentEvent.Type == EventType.Course ? GetDateRange(currentEvent.StartDate, currentEvent.EndDate.Value) : string.Empty,
+                StartDate = currentEvent.StartDate
+            };
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditEvent(AddEventInputModel model)
+        {
+            string alertType = "danger";
+            string alertMsg = Resources.EventsResource.EventEditFailure;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var currentEvent = this.events.GetById(model.Id);
+                    this.events.Update(currentEvent);
+                    if (model.Type == EventType.Course)
+                    {
+                        var dateRange = model.DateRange.Split(new char[] { '-', }, StringSplitOptions.RemoveEmptyEntries);
+                        currentEvent.StartDate = Convert.ToDateTime(dateRange[0]);
+                        currentEvent.EndDate = Convert.ToDateTime(dateRange[1]);
+                    }
+                    else
+                    {
+                        currentEvent.StartDate = model.StartDate;
+                    }
+                    currentEvent.Description = model.Description;
+                    currentEvent.Title = model.Title;
+                    currentEvent.Type = model.Type;
+
+                    this.events.SaveChanges();
+                    alertType = "success";
+                    alertMsg = Resources.EventsResource.EventEditSuccess;
+
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception somewhere
+                }
+            }
+
+            return Json(new { alertType, alertMsg }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        private string GetDateRange(DateTime startDate, DateTime endDate)
+        {
+            return startDate.ToString("dd/MM/yyyy") + " - " + endDate.ToString("dd/MM/yyyy");
         }
     }
 }
