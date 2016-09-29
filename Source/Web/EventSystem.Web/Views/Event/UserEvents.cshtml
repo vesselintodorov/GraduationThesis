@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<EventSystem.Web.Models.Event.EventViewModel>
 @using GridMvc.Html
-
+@using Resources;
 @{
     ViewBag.Title = "UserEvents";
 }
@@ -11,11 +11,11 @@
 @Html.Grid(Model).Named("userEventsGrid").Columns(columns =>
            {
                columns.Add(m => m.Id, true);
-               columns.Add(m => m.Title);
-               columns.Add(m => m.Type);
-               columns.Add(m => m.ShortDescription);
-               columns.Add(m => m.StartDate);
-               columns.Add(m => m.EndDate);
+               columns.Add(m => m.Title).Titled(Global.Title);
+               columns.Add(m => m.LocalizedType).Titled(Global.Type);
+               columns.Add(m => m.ShortDescription).Titled(Global.Description);
+               columns.Add(m => m.StartDate).Titled(Global.StartDate);
+               columns.Add(m => m.EndDate).Titled(Global.EndDate);
            }).WithPaging(20)
 
 

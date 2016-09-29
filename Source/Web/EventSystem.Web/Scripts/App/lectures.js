@@ -2,6 +2,7 @@
 
 var lectures = function () {
     $(document).ready(function () {
+        debugger;
         $(document).on("click", ".btnDeleteLecture", onDeleteLecture);
         $(document).on("click", "#lecturesGridContainer .grid-mvc tr", onLecturesGridClick);
     });

@@ -71,7 +71,7 @@ input.daterangepicker {
     visibility: hidden;
 }
 
-.navbar-brand {
+/*.navbar-brand {
     padding-top: 5px;
 }
 
@@ -81,7 +81,7 @@ input.daterangepicker {
         height: 40px;
         -webkit-filter: invert(100%);
         filter: invert(100%);
-    }
+    }*/
 
 #addCommentDiv div {
     margin-bottom: 10px;
@@ -109,3 +109,8 @@ input.daterangepicker {
     margin-bottom: 15px;
 }
 /*darkseegreen ghostwhite*/
+
+.breakWord {
+    -ms-word-wrap: break-word;
+     word-wrap: break-word;
+}

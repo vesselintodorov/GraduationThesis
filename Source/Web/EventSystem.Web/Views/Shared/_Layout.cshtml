@@ -14,6 +14,7 @@
     <script src="~/Scripts/daterangepicker.js"></script>
     <link href="~/Content/daterangepicker.css" rel="stylesheet" />
     <script src="~/Scripts/App/app.js"></script>
+    <script src="~/Scripts/App/lectures.js"></script>
     @using Resources;
 </head>
 <body>
@@ -25,11 +26,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @*@Html.ActionLink(Global.TUEvents, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                @Html.ActionLink(Global.TUEvents, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*<a href="@Url.Action("Index", "Home")" class="navbar-brand">
                     <img src="~/Content/Images/Tu-sofia-logo.png" title="@Global.TUEvents" alt="additional title" />
                     <span>@Global.TUEvents</span>
-                </a>
+                </a>*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

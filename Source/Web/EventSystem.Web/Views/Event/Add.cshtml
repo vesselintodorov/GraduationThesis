@@ -6,7 +6,7 @@
     var eventType = Model != null ? (int)Model.Type : 1; // if its first load set first item of the event types enum as event type
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <div id="addEventContainer">
 
     @using (Html.BeginForm("Add", "Event", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

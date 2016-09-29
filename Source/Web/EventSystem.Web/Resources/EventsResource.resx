@@ -216,4 +216,7 @@
   <data name="EventEditSuccess" xml:space="preserve">
     <value>Събитието е променено успешно!</value>
   </data>
+  <data name="LectureFullDescription" xml:space="preserve">
+    <value>Пълно описание на лекцията</value>
+  </data>
 </root>

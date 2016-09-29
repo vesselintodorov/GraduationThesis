@@ -46,5 +46,7 @@ namespace EventSystem.Web.Models.Event
         public List<UserViewModel> Users { get; set; }
 
         public int ExternallySelectedLectureId { get; set; }
+
+        public string LocalizedType { get; set; }
     }
 }

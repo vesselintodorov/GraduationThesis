@@ -57,6 +57,8 @@ namespace EventSystem.Web.Controllers
                 IsUserEnrolled = CheckIfCurrentUserIsEnrolledInEvent(eventId, currentUserId)
             };
 
+            model.LocalizedType = base.GetLocalizedEventTypeString(model.Type);
+
             model.ExternallySelectedLectureId = lectureId.HasValue ? lectureId.Value : 0;
 
             return View(model);
@@ -170,6 +172,7 @@ namespace EventSystem.Web.Controllers
             foreach (var item in model)
             {
                 item.ShortDescription = this.GetShortDescription(item.Description);
+                item.LocalizedType = base.GetLocalizedEventTypeString(item.Type);
             }
 
             return PartialView(model);
@@ -342,7 +345,7 @@ namespace EventSystem.Web.Controllers
         {
             var currentEvent = this.events.GetById(eventId);
             var currentUserId = User.Identity.GetUserId();
-            return this.lectures.All().Where(x => x.EventId == eventId)
+            var allLectures = this.lectures.All().Where(x => x.EventId == eventId)
                 .Select(x => new CourseLectureViewModel
                 {
                     Id = x.Id,
@@ -354,6 +357,12 @@ namespace EventSystem.Web.Controllers
                     IsCreator = currentEvent.Author == currentUserId,
                 }).ToList();
 
+            foreach (var lecture in allLectures)
+            {
+                lecture.ShortDescription = this.GetShortDescription(lecture.LectureDescription);
+            }
+
+            return allLectures;
         }
 
         private List<UserViewModel> GetCourseUsers(int eventId)
@@ -494,6 +503,7 @@ namespace EventSystem.Web.Controllers
             foreach (var item in model)
             {
                 item.ShortDescription = this.GetShortDescription(item.Description);
+                item.LocalizedType = base.GetLocalizedEventTypeString(item.Type);
             }
 
             return View(model);
@@ -506,7 +516,8 @@ namespace EventSystem.Web.Controllers
                 EventId = x.EventID,
                 Title = x.Title,
                 Content = x.Content,
-                DateAdded = x.DateAdded
+                DateAdded = x.DateAdded,
+                CreatorName = x.UserId.FirstName + " " + x.UserId.LastName
             }).OrderByDescending(x => x.DateAdded);
 
             int pageSize = 5;
@@ -528,6 +539,7 @@ namespace EventSystem.Web.Controllers
         [Authorize]
         public ActionResult AddComment(AddCommentInputModel model)
         {
+            var currentUserId = User.Identity.GetUserId();
             string alertType = "danger";
             string alertMsg = Resources.Global.CommentAddFailed;
             if (ModelState.IsValid)
@@ -539,7 +551,8 @@ namespace EventSystem.Web.Controllers
                         EventID = model.EventId,
                         Title = model.Title,
                         Content = model.Content,
-                        DateAdded = DateTime.Now
+                        DateAdded = DateTime.Now,
+                        UserID = currentUserId
                     });
 
                     this.comments.SaveChanges();

@@ -16,6 +16,11 @@ namespace EventSystem.Data.Models
         [ForeignKey("EventID")]
         public virtual Event EventId { get; set; }
 
+        public string UserID { get; set; }
+
+        [ForeignKey("UserID")]
+        public virtual ApplicationUser UserId { get; set; }
+
         public string Title { get; set; }
 
         public string Content { get; set; }

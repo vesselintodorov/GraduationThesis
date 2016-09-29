@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<EventSystem.Web.Models.Event.CommentViewModel>
 @using PagedList.Mvc;
+@using Resources;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @if (Model.Count() > 0)
@@ -14,6 +15,7 @@
             </div>
             <div class="col-md-12 commentContentStyle">
                 <p>@comment.Content</p>
+                <p class="pull-right">@comment.CreatorName</p>
             </div>
         </div>
     }
@@ -24,6 +26,6 @@ else
 }
 
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Global.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Global.Of @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Comments", "Event", new { eventId = ViewBag.EventId, page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "commentsDiv" }))

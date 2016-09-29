@@ -1,10 +1,10 @@
 ﻿@model EventSystem.Web.Models.Event.BrowseFilterInputModel
 @{
-    ViewBag.Title = "Browse";
+    ViewBag.Title = Resources.Global.Browse;
 }
 
 
-<h2>Browse</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Ajax.BeginForm("List", "Event",
     new AjaxOptions

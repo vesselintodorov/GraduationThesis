@@ -1,4 +1,5 @@
 ﻿@model EventSystem.Web.Models.Event.CourseLectureViewModel
+@using Resources;
 <div id="lectureModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -8,20 +9,36 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid bd-example-row">
-                    <div>@Model.LectureDescription</div>
-                    <div>@Model.LectureTeacher</div>
-                    <div>@Model.LectureDate</div>
+                    <div class="col-md-12">
+                        <div class="col-md-5">@EventsResource.LectureTitle:</div>
+                        <div class="col-md-6">@Model.LectureTitle</div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="col-md-5">@EventsResource.LectureTeacher:</div>
+                        <div class="col-md-6">@Model.LectureTeacher</div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="col-md-5">@Global.Date:</div>
+                        <div class="col-md-6"> @Model.LectureDate</div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="col-md-12">@EventsResource.LectureFullDescription:</div>
+                        <div class="col-md-12 breakWord">@Model.LectureDescription</div>
+                    </div>
                 </div>
-            </div>
+                </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
             </div>
         </div>
     </div>
 </div>
 @*<div class="bd-example bd-example-padded-bottom">
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#gridSystemModal">
-        Launch demo modal
-    </button>
-</div>*@
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#gridSystemModal">
+            Launch demo modal
+        </button>
+    </div>*@

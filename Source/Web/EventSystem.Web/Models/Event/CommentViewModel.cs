@@ -14,5 +14,7 @@ namespace EventSystem.Web.Models.Event
         public string Content { get; set; }
 
         public DateTime DateAdded { get; set; }
+
+        public string CreatorName { get; set; }
     }
 }

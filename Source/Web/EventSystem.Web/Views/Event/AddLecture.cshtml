@@ -1,11 +1,10 @@
-﻿
-@model EventSystem.Web.Models.Event.CourseLectureViewModel
+﻿@model EventSystem.Web.Models.Event.CourseLectureViewModel
 @{
     int eventId = Convert.ToInt32(ViewBag.EventId);
 }
 @using Resources;
 
-<script src="~/Scripts/App/lectures.js"></script>
+@*<script src="~/Scripts/App/lectures.js"></script>*@
 
 @using (Ajax.BeginForm("AddLecture", "Event",
     new AjaxOptions
@@ -22,7 +21,11 @@
     <div class="form-group col-md-12">
         @Html.LabelFor(m => m.LectureTitle, new { @class = "col-md-2 control-label" })
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.LectureTitle, string.Empty, new { @class = "form-control", placeholder = EventsResource.LectureTitlePlaceholder })
+            @Html.TextBoxFor(m => m.LectureTitle, string.Empty, new
+       {
+           @class = "form-control",
+           placeholder = EventsResource.LectureTitlePlaceholder
+       })
             @Html.ValidationMessageFor(m => m.LectureTitle)
         </div>
     </div>
@@ -59,8 +62,6 @@
     </div>
 }
 
-<div id="lectureModalContainer">
 
-</div>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>

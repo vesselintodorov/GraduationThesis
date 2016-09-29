@@ -1,15 +1,16 @@
 ﻿
 @model IEnumerable<EventSystem.Web.Models.Event.EventViewModel>
 @using GridMvc.Html
+@using Resources;
 
 @Html.Grid(Model).Named("browseEventsGrid").Columns(columns =>
            {
                columns.Add(m => m.Id, true);
-               columns.Add(m => m.Title).Filterable(true);
-               columns.Add(m => m.Type).Filterable(true);
-               columns.Add(m => m.ShortDescription).Filterable(true);
-               columns.Add(m => m.StartDate).Filterable(true);
-               columns.Add(m => m.EndDate).Filterable(true);
+               columns.Add(m => m.Title).Titled(Global.Title);
+               columns.Add(m => m.LocalizedType).Titled(Global.Type);
+               columns.Add(m => m.ShortDescription).Titled(Global.Description);
+               columns.Add(m => m.StartDate).Titled(Global.StartDate);
+               columns.Add(m => m.EndDate).Titled(Global.EndDate);
            }).WithPaging(20)
 
 

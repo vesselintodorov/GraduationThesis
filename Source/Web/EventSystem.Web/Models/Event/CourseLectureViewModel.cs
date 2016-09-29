@@ -33,5 +33,7 @@ namespace EventSystem.Web.Models.Event
         public int EventId { get; set; }
 
         public bool IsCreator { get; set; }
+
+        public string ShortDescription { get; set; }
     }
 }

@@ -241,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пълно описание на лекцията.
+        /// </summary>
+        public static string LectureFullDescription {
+            get {
+                return ResourceManager.GetString("LectureFullDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Лекции.
         /// </summary>
         public static string Lectures {

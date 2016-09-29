@@ -22,11 +22,33 @@
 
         <div id="eventInfoContainer" class="panel-collapse collapse in">
             <div class="panel-body">
-                <p>Title: @Model.Title</p>
-                <p>Type: @Model.Type.ToString()</p>
-                <p>Description: @Model.Description</p>
-                <p>StartDate: @Model.StartDate</p>
-                <p>EndDate: @Model.EndDate</p>
+                <div class="col-md-12">
+                    <div class='col-md-5'>@Global.Title:</div>
+                    <div class='col-md-6'>@Model.Title</div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class='col-md-5'>@Global.Type</div>
+                    <div class='col-md-6'>@Model.LocalizedType</div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class='col-md-5'>@Global.Description</div>
+                    <div class='col-md-6'>@Model.Description</div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class='col-md-5'>@Global.StartDate</div>
+                    <div class='col-md-6'>@Model.StartDate</div>
+                </div>
+                @if (Model.Type == EventSystem.Data.Common.Enums.EventType.Course)
+                {
+                    <br />
+                    <div class="col-md-12">
+                        <div class='col-md-5'>@Global.EndDate</div>
+                        <div class='col-md-6'>@Model.EndDate</div>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -141,7 +163,9 @@
             </div>
         </div>
     </div>
+    <div id="lectureModalContainer">
 
+    </div>
 
     <div id="editEventModalContainer">
 
